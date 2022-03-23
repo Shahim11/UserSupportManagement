@@ -1,0 +1,101 @@
+﻿@model IEnumerable<UserSupportManagement.Models.Vendor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactPersonName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactPersonPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorDetails)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactPersonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactPersonPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.VendorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.VendorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VendorId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

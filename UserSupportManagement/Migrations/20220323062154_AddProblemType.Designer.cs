@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserSupportManagement.Data;
 
 namespace UserSupportManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220323062154_AddProblemType")]
+    partial class AddProblemType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,41 +306,6 @@ namespace UserSupportManagement.Migrations
                     b.HasKey("ProblemTypeId");
 
                     b.ToTable("ProblemTypes");
-                });
-
-            modelBuilder.Entity("UserSupportManagement.Models.StatusType", b =>
-                {
-                    b.Property<int>("StatusTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CreatedBy");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("StatusTypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StatusTypeValue")
-                        .HasColumnType("int");
-
-                    b.HasKey("StatusTypeId");
-
-                    b.ToTable("StatusTypes");
                 });
 
             modelBuilder.Entity("UserSupportManagement.Models.Vendor", b =>

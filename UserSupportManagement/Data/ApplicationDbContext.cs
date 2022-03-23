@@ -23,7 +23,17 @@ namespace UserSupportManagement.Data
             _httpContextAccessor = httpContextAccessor;
         }
 
+        // [01] Concern
         public DbSet<Concern> Concerns { get; set; }
+
+        // [02] Vendor
+        public DbSet<Vendor> Vendors { get; set; }
+
+        // [03] ProblemType
+        public DbSet<ProblemType> ProblemTypes { get; set; }
+
+        // [04] StatusType
+        public DbSet<StatusType> StatusTypes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
