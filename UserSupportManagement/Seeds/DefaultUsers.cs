@@ -68,6 +68,11 @@ namespace UserSupportManagement.Seeds
         {
             var adminRole = await roleManager.FindByNameAsync("SuperAdmin");
             await roleManager.AddPermissionClaim(adminRole, "Concerns");
+            await roleManager.AddPermissionClaim(adminRole, "Vendors");
+            await roleManager.AddPermissionClaim(adminRole, "ProblemTypes");
+            await roleManager.AddPermissionClaim(adminRole, "StatusTypes");
+            await roleManager.AddPermissionClaim(adminRole, "Problems");
+            await roleManager.AddPermissionClaim(adminRole, "Solutions");
         }
 
         public static async Task AddPermissionClaim(this RoleManager<IdentityRole> roleManager, IdentityRole role, string module)

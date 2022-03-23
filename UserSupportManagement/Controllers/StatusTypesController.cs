@@ -56,6 +56,8 @@ namespace UserSupportManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("StatusTypeId,StatusTypeName,StatusTypeValue,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] StatusType statusType)
         {
+            statusType.IsActive = true;
+
             if (ModelState.IsValid)
             {
                 _context.Add(statusType);

@@ -25,6 +25,12 @@ namespace UserSupportManagement.Controllers
             var model = new PermissionViewModel();
             var allPermissions = new List<RoleClaimsViewModel>();
             allPermissions.GetPermissions(typeof(Permissions.Concerns), roleId);
+            allPermissions.GetPermissions(typeof(Permissions.Vendors), roleId);
+            allPermissions.GetPermissions(typeof(Permissions.ProblemTypes), roleId);
+            allPermissions.GetPermissions(typeof(Permissions.StatusTypes), roleId);
+            allPermissions.GetPermissions(typeof(Permissions.Problems), roleId);
+            allPermissions.GetPermissions(typeof(Permissions.Solutions), roleId);
+            
             var role = await _roleManager.FindByIdAsync(roleId);
             model.RoleId = roleId;
             var claims = await _roleManager.GetClaimsAsync(role);

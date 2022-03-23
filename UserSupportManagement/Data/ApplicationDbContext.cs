@@ -35,6 +35,12 @@ namespace UserSupportManagement.Data
         // [04] StatusType
         public DbSet<StatusType> StatusTypes { get; set; }
 
+        // [05] Problem
+        public DbSet<Problem> Problems { get; set; }
+
+        // [06] Problem
+        public DbSet<Solution> Solutions { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

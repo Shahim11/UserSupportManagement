@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserSupportManagement.Data;
 
 namespace UserSupportManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220323065629_AddProblem")]
+    partial class AddProblem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -351,48 +353,6 @@ namespace UserSupportManagement.Migrations
                     b.ToTable("ProblemTypes");
                 });
 
-            modelBuilder.Entity("UserSupportManagement.Models.Solution", b =>
-                {
-                    b.Property<int>("SolutionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("CreatedBy");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ModifiedBy");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProblemId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SolutionDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StatusTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SolutionId");
-
-                    b.HasIndex("ProblemId");
-
-                    b.HasIndex("StatusTypeId");
-
-                    b.ToTable("Solutions");
-                });
-
             modelBuilder.Entity("UserSupportManagement.Models.StatusType", b =>
                 {
                     b.Property<int>("StatusTypeId")
@@ -555,25 +515,6 @@ namespace UserSupportManagement.Migrations
                         .IsRequired();
 
                     b.Navigation("ProblemType");
-
-                    b.Navigation("StatusType");
-                });
-
-            modelBuilder.Entity("UserSupportManagement.Models.Solution", b =>
-                {
-                    b.HasOne("UserSupportManagement.Models.Problem", "Problem")
-                        .WithMany()
-                        .HasForeignKey("ProblemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UserSupportManagement.Models.StatusType", "StatusType")
-                        .WithMany()
-                        .HasForeignKey("StatusTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Problem");
 
                     b.Navigation("StatusType");
                 });
