@@ -102,8 +102,8 @@ namespace UserSupportManagement.Controllers
         {
             //problem.StatusTypeId = 1;
 
-            var temp = _context.Problems.Find(id);
-            problem.StatusTypeId = temp.StatusTypeId;
+            //var temp = _context.Problems.Find(id);
+            //problem.StatusTypeId = temp.StatusTypeId;
             //await _context.SaveChangesAsync();
 
             if (id != problem.ProblemId)

@@ -41,6 +41,9 @@ namespace UserSupportManagement.Data
         // [06] Problem
         public DbSet<Solution> Solutions { get; set; }
 
+        // [07] Order
+        public DbSet<Order> Orders { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

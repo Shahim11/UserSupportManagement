@@ -30,7 +30,8 @@ namespace UserSupportManagement.Controllers
             allPermissions.GetPermissions(typeof(Permissions.StatusTypes), roleId);
             allPermissions.GetPermissions(typeof(Permissions.Problems), roleId);
             allPermissions.GetPermissions(typeof(Permissions.Solutions), roleId);
-            
+            allPermissions.GetPermissions(typeof(Permissions.Orders), roleId);
+
             var role = await _roleManager.FindByIdAsync(roleId);
             model.RoleId = roleId;
             var claims = await _roleManager.GetClaimsAsync(role);
@@ -61,7 +62,7 @@ namespace UserSupportManagement.Controllers
             {
                 await _roleManager.AddPermissionClaim(role, claim.Value);
             }
-            return RedirectToAction("Index", new { roleId = model.RoleId });
+            return RedirectToAction("Index","Roles",new { roleId = model.RoleId });
         }
     }
 }

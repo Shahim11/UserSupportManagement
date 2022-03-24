@@ -69,5 +69,14 @@ namespace UserSupportManagement.Constants
             public const string Delete = "Permissions.Solutions.Delete";
         }
 
+        // [07] Permission For Order
+        public static class Orders
+        {
+            public const string View = "Permissions.Orders.View";
+            public const string Create = "Permissions.Orders.Create";
+            public const string Edit = "Permissions.Orders.Edit";
+            public const string Delete = "Permissions.Orders.Delete";
+        }
+
     }
 }
