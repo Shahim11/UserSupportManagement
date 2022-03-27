@@ -49,8 +49,8 @@ namespace UserSupportManagement.Controllers
         // GET: Solutions/Create
         public IActionResult Create()
         {
-            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemId");
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId");
+            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName");
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName");
             return View();
         }
 
@@ -69,8 +69,8 @@ namespace UserSupportManagement.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemId", solution.ProblemId);
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId", solution.StatusTypeId);
+            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
             return View(solution);
         }
 

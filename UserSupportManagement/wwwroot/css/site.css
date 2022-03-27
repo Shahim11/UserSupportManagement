@@ -75,3 +75,10 @@ body {
 .form__style {
     margin-left: 310px;
 }
+
+
+/* Create New Button styles
+-------------------------------------------------- */
+.createbutton{
+    text-align:right;
+}

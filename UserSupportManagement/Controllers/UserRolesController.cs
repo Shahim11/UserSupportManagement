@@ -26,6 +26,7 @@ namespace UserSupportManagement.Controllers
         {
             var viewModel = new List<UserRolesViewModel>();
             var user = await _userManager.FindByIdAsync(userId);
+            ViewBag.EmployeeCode = user.EmployeeCode;
             foreach (var role in _roleManager.Roles.ToList())
             {
                 var userRolesViewModel = new UserRolesViewModel

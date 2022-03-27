@@ -5,7 +5,7 @@ namespace UserSupportManagement.Models
 {
     public class SolutionViewModel
     {
-        public IList<Problem> Problems { get; set; }
-        public IList<Solution> Solutions { get; set; }
+        public Problem Problem { get; set; }
+        public Solution Solution { get; set; }
     }
 }

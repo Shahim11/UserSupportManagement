@@ -7,16 +7,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>*@
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
+<div class="createbutton">
+    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Create)).Result.Succeeded)
+    {
+        <a class="btn btn-primary mb-3 text-end" asp-action="Create"><i class="fa-solid fa-circle-plus"></i> Create New</a>
+    }
+</div>
 
-@if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Create)).Result.Succeeded)
-{
-    <a asp-action="Create">Create New</a>
-}
+@*<div class="createbutton mb-3 btn btn-primary" >
+    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Create)).Result.Succeeded)
+    {
+        <a asp-action="Create">Create New</a>
+    }
+</div>*@
 
 <table class="table">
     <thead>
@@ -27,7 +32,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ConcernShortName)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
             <th>
@@ -41,8 +46,10 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ModifiedBy)
+            </th>*@
+            <th>
+                Actions
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -54,7 +61,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ConcernShortName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
@@ -68,24 +75,29 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ModifiedBy)
-            </td>
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.ConcernId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ConcernId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ConcernId">Delete</a>*@
-
-                @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.View)).Result.Succeeded)
-                {
-                    <a asp-action="Details" asp-route-id="@item.ConcernId">Details</a>
-                }
-                @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Edit)).Result.Succeeded)
-                {
-                    <a asp-action="Edit" asp-route-id="@item.ConcernId">Edit</a>
-                }
-                @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Delete)).Result.Succeeded)
-                {
-                    <a asp-action="Delete" asp-route-id="@item.ConcernId">Delete</a>
-                }
+            </td>*@
+           
+            <td class="text-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Action
+                    </button>
+                    <div class="dropdown-menu shadow animated--grow-in">
+                              
+                        @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.View)).Result.Succeeded)
+                            {
+                                <a class="dropdown-item" asp-action="Details" asp-route-id="@item.ConcernId"><i class="fa-solid fa-circle-info"></i> Details</a>
+                            }
+                        @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Edit)).Result.Succeeded)
+                            {
+                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.ConcernId"><i class="fas fa-pencil-alt"></i> Edit</a>
+                            }
+                        @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Delete)).Result.Succeeded)
+                            {
+                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.ConcernId"><i class="fas fa-trash-alt"></i> Delete</a>
+                            }                 
+                    </div>
+                </div>
             </td>
         </tr>
 }

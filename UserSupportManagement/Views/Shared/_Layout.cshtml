@@ -29,7 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Users" asp-action="Index">Users</a>
                         </li>
                         <li class="nav-item">
@@ -55,11 +55,30 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Orders" asp-action="Index">Orders</a>
+                        </li>*@
+                        <li>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Menus
+                                </button>
+
+                                <div class="dropdown-menu shadow animated--grow-in">    
+                                    <a class="dropdown-item" asp-controller="Users" asp-action="Index">Users</a>
+                                    <a class="dropdown-item" asp-controller="Roles" asp-action="Index">Roles</a>
+                                    <a class="dropdown-item" asp-controller="Concerns" asp-action="Index">Concerns</a>                                  
+                                    <a class="dropdown-item" asp-controller="Vendors" asp-action="Index">Vendors</a>                   
+                                    <a class="dropdown-item" asp-controller="ProblemTypes" asp-action="Index">ProblemTypes</a>
+                                    <a class="dropdown-item" asp-controller="StatusTypes" asp-action="Index">StatusTypes</a>
+                                    <a class="dropdown-item" asp-controller="Problems" asp-action="Index">Problems</a>
+                                    <a class="dropdown-item" asp-controller="Solutions" asp-action="Index">Solutions</a>
+                                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index">Orders</a>
+                                </div>
+                            </div>
                         </li>
 
-                        @*<li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>*@
+                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

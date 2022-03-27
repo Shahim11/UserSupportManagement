@@ -19,6 +19,7 @@ namespace UserSupportManagement.Controllers
             _context = context;
         }
 
+
         // GET: Problems
         public async Task<IActionResult> Index()
         {
@@ -49,8 +50,8 @@ namespace UserSupportManagement.Controllers
         // GET: Problems/Create
         public IActionResult Create()
         {
-            ViewData["ProblemTypeId"] = new SelectList(_context.ProblemTypes, "ProblemTypeId", "ProblemTypeId");
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId");
+            ViewData["ProblemTypeId"] = new SelectList(_context.ProblemTypes, "ProblemTypeId", "ProblemTypeName");
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName");
             return View();
         }
 
@@ -70,8 +71,8 @@ namespace UserSupportManagement.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProblemTypeId"] = new SelectList(_context.ProblemTypes, "ProblemTypeId", "ProblemTypeId", problem.ProblemTypeId);
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId", problem.StatusTypeId);
+            ViewData["ProblemTypeId"] = new SelectList(_context.ProblemTypes, "ProblemTypeId", "ProblemTypeName", problem.ProblemTypeId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", problem.StatusTypeId);
             return View(problem);
         }
 
@@ -88,8 +89,8 @@ namespace UserSupportManagement.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProblemTypeId"] = new SelectList(_context.ProblemTypes, "ProblemTypeId", "ProblemTypeId", problem.ProblemTypeId);
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId", problem.StatusTypeId);
+            ViewData["ProblemTypeId"] = new SelectList(_context.ProblemTypes, "ProblemTypeId", "ProblemTypeName", problem.ProblemTypeId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusType", problem.StatusTypeId);
             return View(problem);
         }
 
@@ -100,7 +101,7 @@ namespace UserSupportManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProblemId,ProblemTypeId,StatusTypeId,ProblemName,ProblemDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Problem problem)
         {
-            //problem.StatusTypeId = 1;
+            problem.StatusTypeId = 1;
 
             //var temp = _context.Problems.Find(id);
             //problem.StatusTypeId = temp.StatusTypeId;
