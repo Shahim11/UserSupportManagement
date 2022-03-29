@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using UserSupportManagement.Constants;
 using UserSupportManagement.Data;
 using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class StatusTypesController : Controller
     {
         private readonly ApplicationDbContext _context;

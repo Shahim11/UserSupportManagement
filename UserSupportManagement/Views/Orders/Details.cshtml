@@ -1,4 +1,7 @@
-﻿@model UserSupportManagement.Models.Order
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using UserSupportManagement.Constants
+@model UserSupportManagement.Models.Order
 
 @{
     ViewData["Title"] = "Details";
@@ -14,19 +17,19 @@
             @Html.DisplayNameFor(model => model.Vendor)
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Vendor.VendorId)
+            @Html.DisplayFor(model => model.Vendor.VendorName)
         </dd>
         <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.StatusType)
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.StatusType.StatusTypeId)
+            @Html.DisplayFor(model => model.StatusType.StatusTypeName)
         </dd>
         <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.Problem)
         </dt>
         <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.Problem.ProblemId)
+            @Html.DisplayFor(model => model.Problem.ProblemName)
         </dd>
         <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.OrderName)
@@ -53,6 +56,30 @@
             @Html.DisplayFor(model => model.OrderItemQuantity)
         </dd>
         <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>       
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.IsActive)
         </dt>
         <dd class = "col-sm-8">
@@ -65,32 +92,13 @@
             @Html.DisplayFor(model => model.IsDeleted)
         </dd>
         <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-        <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-        <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt class = "col-sm-4">
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </dt>
-        <dd class = "col-sm-8">
-            @Html.DisplayFor(model => model.ModifiedBy)
-        </dd>
     </dl>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.OrderId">Edit</a> |
+    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Orders.Edit)).Result.Succeeded)
+    {
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.OrderId"><i class="fas fa-pencil-alt"></i> Edit </a>
+    }
+    
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>

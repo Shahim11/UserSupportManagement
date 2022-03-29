@@ -1,4 +1,7 @@
-﻿@model UserSupportManagement.Models.Solution
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using UserSupportManagement.Constants
+@model UserSupportManagement.Models.Solution
 
 @{
     ViewData["Title"] = "Details";

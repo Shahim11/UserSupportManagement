@@ -22,7 +22,7 @@ namespace UserSupportManagement.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Orders.Include(o => o.Problem).Include(o => o.StatusType).Include(o => o.Vendor);
+            var applicationDbContext = _context.Orders.Include(o => o.Problem).Include(o => o.StatusType).Include(o => o.Vendor).Where(x=>x.IsDeleted==false);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,7 +38,7 @@ namespace UserSupportManagement.Controllers
                 .Include(o => o.Problem)
                 .Include(o => o.StatusType)
                 .Include(o => o.Vendor)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+                .FirstOrDefaultAsync(m => m.OrderId == id && m.IsDeleted == false );
             if (order == null)
             {
                 return NotFound();
@@ -50,9 +50,9 @@ namespace UserSupportManagement.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemId");
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId");
-            ViewData["VendorId"] = new SelectList(_context.Vendors, "VendorId", "VendorId");
+            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName");
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName");
+            ViewData["VendorId"] = new SelectList(_context.Vendors, "VendorId", "VendorName");
             return View();
         }
 
@@ -88,9 +88,9 @@ namespace UserSupportManagement.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemId", order.ProblemId);
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId", order.StatusTypeId);
-            ViewData["VendorId"] = new SelectList(_context.Vendors, "VendorId", "VendorId", order.VendorId);
+            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", order.ProblemId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", order.StatusTypeId);
+            ViewData["VendorId"] = new SelectList(_context.Vendors, "VendorId", "VendorName", order.VendorId);
             return View(order);
         }
 

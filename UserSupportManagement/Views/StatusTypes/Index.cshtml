@@ -22,9 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.StatusTypeName)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.StatusTypeValue)
-            </th>
+            </th>*@
             @*<th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
@@ -40,7 +40,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ModifiedBy)
             </th>*@
-            <th>Actions</th>
+            <th style="width:10%">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -49,9 +49,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StatusTypeName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.StatusTypeValue)
-            </td>
+            </td>*@
             @*<td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>

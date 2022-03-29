@@ -19,8 +19,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="VendorDetails" class="control-label"></label>
-                <input asp-for="VendorDetails" class="form-control" />
+                @*<input asp-for="VendorDetails" class="form-control" />*@
                 <span asp-validation-for="VendorDetails" class="text-danger"></span>
+                <textarea class="form-control" asp-for="VendorDetails"></textarea>
             </div>
             <div class="form-group">
                 <label asp-for="VendorEmail" class="control-label"></label>

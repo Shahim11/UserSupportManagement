@@ -1,4 +1,7 @@
-﻿@model UserSupportManagement.Models.Concern
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using UserSupportManagement.Constants
+@model UserSupportManagement.Models.Concern
 
 @{
     ViewData["Title"] = "Details";
@@ -61,6 +64,10 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ConcernId">Edit</a> 
+    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Edit)).Result.Succeeded)
+    {
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ConcernId"><i class="fas fa-pencil-alt"></i> Edit </a>
+    }
+    
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>

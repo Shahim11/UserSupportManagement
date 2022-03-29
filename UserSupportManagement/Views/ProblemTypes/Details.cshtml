@@ -1,13 +1,16 @@
-﻿@model UserSupportManagement.Models.ProblemType
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using UserSupportManagement.Constants
+@model UserSupportManagement.Models.ProblemType
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center">Details</h1>
 
 <div>
-    <h4>ProblemType</h4>
+    @*<h4>ProblemType</h4>*@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -49,6 +52,10 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ProblemTypeId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.ProblemTypes.Edit)).Result.Succeeded)
+    {
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ProblemTypeId"><i class="fas fa-pencil-alt"></i> Edit </a>
+    }
+    
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>

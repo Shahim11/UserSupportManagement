@@ -1,4 +1,7 @@
-﻿@model UserSupportManagement.Models.Problem
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using UserSupportManagement.Constants
+@model UserSupportManagement.Models.Problem
 @*@model UserSupportManagement.Models.Solution*@
 
 
@@ -79,6 +82,10 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ProblemId">Edit</a>
+    @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Problems.Edit)).Result.Succeeded)
+    {
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ProblemId"><i class="fas fa-pencil-alt"></i> Edit </a>
+    }
+    
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>

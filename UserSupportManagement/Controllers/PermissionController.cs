@@ -24,6 +24,7 @@ namespace UserSupportManagement.Controllers
         {
             var model = new PermissionViewModel();
             var allPermissions = new List<RoleClaimsViewModel>();
+
             allPermissions.GetPermissions(typeof(Permissions.Concerns), roleId);
             allPermissions.GetPermissions(typeof(Permissions.Vendors), roleId);
             allPermissions.GetPermissions(typeof(Permissions.ProblemTypes), roleId);
