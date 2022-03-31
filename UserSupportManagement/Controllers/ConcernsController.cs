@@ -65,6 +65,7 @@ namespace UserSupportManagement.Controllers
             {
                 _context.Add(concern);
                 await _context.SaveChangesAsync();
+                TempData["success"] = "Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(concern);
@@ -116,6 +117,7 @@ namespace UserSupportManagement.Controllers
                         throw;
                     }
                 }
+                TempData["success"] = "Updated Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(concern);
@@ -147,6 +149,7 @@ namespace UserSupportManagement.Controllers
             var concern = await _context.Concerns.FindAsync(id);
             _context.Concerns.Remove(concern);
             await _context.SaveChangesAsync();
+            TempData["success"] = "Deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
 

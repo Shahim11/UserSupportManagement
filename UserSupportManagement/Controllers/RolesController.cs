@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace UserSupportManagement.Controllers
@@ -18,7 +19,7 @@ namespace UserSupportManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var roles = await _roleManager.Roles.ToListAsync();
+            var roles = await _roleManager.Roles.Where(x => x.Name != "SuperAdmin").ToListAsync();
             return View(roles);
         }
         [HttpPost]

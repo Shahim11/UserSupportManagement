@@ -4,29 +4,30 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Create</h1>
 
-<h4>Problem</h4>
+@*<h4>Problem</h4>*@
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="col-md-6 ">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ProblemTypeId" class="control-label"></label>
-                <select asp-for="ProblemTypeId" class ="form-control" asp-items="ViewBag.ProblemTypeId"></select>
+                <label asp-for="ProblemTypeId" class="text-center control-label">Problem Type</label>
+                <select asp-for="ProblemTypeId" class ="form-control text-center" asp-items="ViewBag.ProblemTypeId"></select>
             </div>
             @*<div class="form-group">
                 <label asp-for="StatusTypeId" class="control-label"></label>
                 <select asp-for="StatusTypeId" class ="form-control" asp-items="ViewBag.StatusTypeId"></select>
             </div>*@
             <div class="form-group">
-                <label asp-for="ProblemName" class="control-label"></label>
+                <label asp-for="ProblemName" class="control-label text-center">Problem Name</label>
                 <input asp-for="ProblemName" class="form-control" />
                 <span asp-validation-for="ProblemName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProblemDetails" class="control-label"></label>
+                <label asp-for="ProblemDetails" class="control-label text-center"> Problem Details</label>
                 @*<input asp-for="ProblemDetails" class="form-control" />*@
                 <span asp-validation-for="ProblemDetails" class="text-danger"></span>
                 <textarea class="form-control" asp-for="ProblemDetails"></textarea>
@@ -56,16 +57,23 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
+            <div class="form-group text-center">
+                <input type="submit" value="Create" class="btn btn-success btn-block" />
             </div>
         </form>
     </div>
+    <div class="col col-md-3"></div>
 </div>
 
-<div>
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="text-center col-md-6">
+        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+    </div>
+    <div class="col col-md-3"></div>
 </div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -8,7 +8,7 @@ using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -19,7 +19,7 @@ namespace UserSupportManagement.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            var allUsersExceptCurrentUser = await _userManager.Users.Where(a => a.Id != currentUser.Id).ToListAsync();
+            var allUsersExceptCurrentUser = await _userManager.Users.Where(a => a.Id != currentUser.Id).Where(x => x.EmployeeName != "Super Admin").ToListAsync();
             return View(allUsersExceptCurrentUser);
         }
     }

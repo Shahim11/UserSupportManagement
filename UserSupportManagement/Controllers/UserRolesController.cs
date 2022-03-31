@@ -26,29 +26,35 @@ namespace UserSupportManagement.Controllers
         {
             var viewModel = new List<UserRolesViewModel>();
             var user = await _userManager.FindByIdAsync(userId);
-            ViewBag.EmployeeCode = user.EmployeeCode;
+            ViewBag.EmpName = user.EmployeeName;
             foreach (var role in _roleManager.Roles.ToList())
             {
-                var userRolesViewModel = new UserRolesViewModel
+                if (!role.Name.Contains("SuperAdmin"))
                 {
-                    RoleName = role.Name
-                };
-                if (await _userManager.IsInRoleAsync(user, role.Name))
-                {
-                    userRolesViewModel.Selected = true;
+                    var userRolesViewModel = new UserRolesViewModel
+                    {
+                        RoleName = role.Name
+                    };
+                    if (await _userManager.IsInRoleAsync(user, role.Name))
+                    {
+                        userRolesViewModel.Selected = true;
+                    }
+                    else
+                    {
+                        userRolesViewModel.Selected = false;
+                    }
+                    viewModel.Add(userRolesViewModel);
+
                 }
-                else
-                {
-                    userRolesViewModel.Selected = false;
-                }
-                viewModel.Add(userRolesViewModel);
+                
             }
             var model = new ManageUserRolesViewModel()
             {
                 UserId = userId,
-                UserRoles = viewModel
-            };
-
+                UserRoles = viewModel,
+                //EmployeeName = user.EmployeeName
+        };
+            
             return View(model);
         }
 

@@ -34,6 +34,7 @@ namespace UserSupportManagement.Controllers
             allPermissions.GetPermissions(typeof(Permissions.Orders), roleId);
 
             var role = await _roleManager.FindByIdAsync(roleId);
+            model.Name = role.Name;
             model.RoleId = roleId;
             var claims = await _roleManager.GetClaimsAsync(role);
             var allClaimValues = allPermissions.Select(a => a.Value).ToList();
