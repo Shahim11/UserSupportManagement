@@ -21,5 +21,7 @@ namespace UserSupportManagement.Models
         public string ProblemDetails { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

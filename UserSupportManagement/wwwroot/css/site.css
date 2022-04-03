@@ -62,6 +62,7 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
 }
 .footer {
   position: absolute;
@@ -81,4 +82,26 @@ body {
 -------------------------------------------------- */
 .createbutton{
     text-align:right;
+}
+
+/* Navbar style
+-------------------------------------------------- */
+.navbar-bg {
+    background: linear-gradient(#06beb6, #48b1bf);
+}
+
+.navbar .nav-item .nav-link {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    color: white;
+}
+
+.navbar .nav-item .nav-link:hover {
+    color: #0984e3;
+}
+
+/* Footer style
+-------------------------------------------------- */
+.footer {
+    background-color: rgba(0, 0, 0, 0.774);
 }

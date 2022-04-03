@@ -19,5 +19,7 @@ namespace UserSupportManagement.Models
         public string SolutionDetails { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
