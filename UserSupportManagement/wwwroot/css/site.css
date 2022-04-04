@@ -62,7 +62,7 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
+    /*background-color: #A1DFFF;*/
 }
 .footer {
   position: absolute;
@@ -104,4 +104,12 @@ body {
 -------------------------------------------------- */
 .footer {
     background-color: rgba(0, 0, 0, 0.774);
+}
+
+/* Login Page style
+-------------------------------------------------- */
+.login-bg {
+    border: .1rem solid #eee;
+    border-radius: 1rem;
+    background: rgba(24,24,27, 0.6);
 }

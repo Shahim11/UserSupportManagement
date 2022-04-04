@@ -9,6 +9,9 @@
 
 @*<h1>Index</h1>*@
 
+<h1 class="text-center">Orders List</h1>
+<br />
+
 <div class="createbutton">
     @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Orders.Create)).Result.Succeeded)
     {

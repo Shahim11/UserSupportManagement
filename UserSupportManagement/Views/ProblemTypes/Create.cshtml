@@ -4,17 +4,18 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Create</h1>
 
-<h4>ProblemType</h4>
+@*<h4>ProblemType</h4>*@
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ProblemTypeName" class="control-label"></label>
-                <input asp-for="ProblemTypeName" class="form-control" />
+                <label asp-for="ProblemTypeName" class="control-label"> Problem Type Name</label>
+                <input asp-for="ProblemTypeName" class="form-control"/>
                 <span asp-validation-for="ProblemTypeName" class="text-danger"></span>
             </div>
             @*<div class="form-group form-check">
@@ -43,14 +44,23 @@
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-success btn-block"/>
             </div>
         </form>
     </div>
+    <div class="col col-md-3"></div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+@*<div>
+    <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+</div>
+*@
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="text-center col-md-6">
+        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+    </div>
+    <div class="col col-md-3"></div>
 </div>
 
 @section Scripts {

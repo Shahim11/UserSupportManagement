@@ -46,15 +46,15 @@ namespace UserSupportManagement.Controllers
                     viewModel.Add(userRolesViewModel);
 
                 }
-                
+
             }
             var model = new ManageUserRolesViewModel()
             {
                 UserId = userId,
                 UserRoles = viewModel,
                 //EmployeeName = user.EmployeeName
-        };
-            
+            };
+
             return View(model);
         }
 

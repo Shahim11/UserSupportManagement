@@ -8,18 +8,19 @@
 
 @*<h4>Concern</h4>*@
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="col col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ConcernName" class="control-label"></label>
-                <input asp-for="ConcernName" class="form-control" />
+                <label asp-for="ConcernName" class="control-label">Concern Name</label>
+                <input asp-for="ConcernName" class="form-control"/>
                 <span asp-validation-for="ConcernName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConcernShortName" class="control-label"></label>
-                <input asp-for="ConcernShortName" class="form-control" />
+                <label asp-for="ConcernShortName" class="control-label">Concern Short Name</label>
+                <input asp-for="ConcernShortName" class="form-control"/>
                 <span asp-validation-for="ConcernShortName" class="text-danger"></span>
             </div>
             @*<div class="form-group form-check">
@@ -48,14 +49,19 @@
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success" />
+                <input type="submit" value="Create" class="btn btn-success btn-block"/>
             </div>
         </form>
     </div>
+    <div class="col col-md-3"></div>
 </div>
 
-<div>
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="text-center col-md-6">
+        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+    </div>
+    <div class="col col-md-3"></div>
 </div>
 
 @section Scripts {
