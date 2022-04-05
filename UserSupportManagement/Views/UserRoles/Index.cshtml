@@ -1,51 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using UserSupportManagement.Models
+@model List<UserSupportManagement.Models.UserRolesViewModel>
 @{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-@model UserSupportManagement.Models.ManageUserRolesViewModel
-<h3>Manage Roles for @ViewBag.EmpName</h3>
+<h1 class="text-center">Users List</h1>
 <br />
-<div class="card">
-    <div id="viewAll" class="card-body table-responsive">
-        <form asp-controller="userroles" method="post" asp-action="update" asp-route-id="@Model.UserId" class="d-inline">
-            <input asp-for="@Model.UserId" type="hidden" />
-            <table class="table table-striped" id="userRolesTable">
-                <thead>
-                    <tr>
-                        <th>
-                            Role
-                        </th>
-                        <th>
-                            Status
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.UserRoles.Count(); i++)
-                    {
-                        <tr>
-                            <td>
-                                <input asp-for="@Model.UserRoles[i].RoleName" type="hidden" />
-                                @Model.UserRoles[i].RoleName
-                            </td>
-                            <td>
-                                <div class="form-check m-1">
-                                    <input asp-for="@Model.UserRoles[i].Selected" class="form-check-input" />
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <div class="col-sm-12" style=" padding: 20px 20px 0px 0px">
-                <button type="submit" id="save" class="btn bg-primary">
-                    <i class="fa fa-check"></i>
-                    Save
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Employee Code</th>
+        <th>Employee Name</th>
+        <th>Email</th>
+        <th>Roles</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.EmployeeCode</td>
+            <td>@user.EmployeeName</td>
+            <td>@user.Email</td>
+            <td>@string.Join(" , ", user.Roles.ToList())</td>
+            @*<td>
+                <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>
+            </td>*@
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Action
+                    </button>
+                    <div class="dropdown-menu shadow animated--grow-in">
+                        <a style='margin-right:16px' asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId" class="dropdown-item">
+                            <i class="fas fa-wrench"></i> Manage Roles
+                        </a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -87,7 +87,7 @@ body {
 /* Navbar style
 -------------------------------------------------- */
 .navbar-bg {
-    background: linear-gradient(#06beb6, #48b1bf);
+    background: linear-gradient(#98c598, #48b1bf);
 }
 
 .navbar .nav-item .nav-link {
@@ -112,4 +112,8 @@ body {
     border: .1rem solid #eee;
     border-radius: 1rem;
     background: rgba(24,24,27, 0.6);
+}
+
+.box-style {
+    border-radius: 20rem;
 }

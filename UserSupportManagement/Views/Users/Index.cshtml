@@ -4,7 +4,7 @@
 @{
 }
 
-@using UserSupportManagement.Models
+@*@using UserSupportManagement.Models
 @using Microsoft.AspNetCore.Identity;
 @model IEnumerable<ApplicationUser>
 <h1 class="text-center">User List</h1>
@@ -15,9 +15,9 @@
             <th>
                 Employee Code
             </th>
-            @*<th>
+            <th>
                 Email
-            </th>*@
+            </th>
             <th>
                 Roles
             </th>
@@ -39,20 +39,20 @@
                             <br>
                             @*<small>
                                 @user.Id
-                            </small>*@
+                            </small>
                         </div>
                     </div>
                 </td>
-                @*<td>
+                <td>
                     <a>
                         @user.Email
                     </a>
-                </td>*@
-               @* <td>
+                </td>
+               <td>
                     <a>
                         @string.Join(" , ", user.Roles.ToList())
                     </a>
-                </td>*@
+                </td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,4 +68,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
