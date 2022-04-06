@@ -65,6 +65,9 @@ namespace UserSupportManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("OrderId,VendorId,StatusTypeId,ProblemId,OrderName,OrderItemName,OrderItemDetails,OrderItemQuantity,IsActive,IsDeleted,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Order order)
         {
+            order.IsActive = true;
+            order.IsDeleted = false;
+
             if (ModelState.IsValid)
             {
                 _context.Add(order);

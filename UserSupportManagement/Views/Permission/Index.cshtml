@@ -6,7 +6,7 @@
 
 @model UserSupportManagement.Models.PermissionViewModel
 @*<h1 class="text-center">Permissions</h1>*@
-<h3>Manage Permission for @Model.Name</h3>
+<h3 class="text-center">Manage Permission for <span class=""></span> @Model.Name</h3>
 <br />
 <div class="card">
     <div id="viewAll" class="card-body table-responsive">
@@ -52,8 +52,7 @@
                     <i class="fa fa-check"></i>
                     Save
                 </button>
-                <a asp-action="Index" asp-route-id="@ViewBag.roleId"
-                   class="btn btn-primary" style="width:auto">Cancel</a>
+                <a asp-action="Index" class="btn btn-primary">Cancel</a>
             </div>
         </form>
     </div>

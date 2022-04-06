@@ -25,7 +25,7 @@ namespace UserSupportManagement.Controllers
         // GET: Concerns
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Concerns.ToListAsync());
+            return View(await _context.Concerns.Where(x => x.IsDeleted == false).ToListAsync());
         }
 
         // GET: Concerns/Details/5
@@ -60,6 +60,7 @@ namespace UserSupportManagement.Controllers
         public async Task<IActionResult> Create([Bind("ConcernId,ConcernName,ConcernShortName,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Concern concern)
         {
             concern.IsActive = true;
+            concern.IsDeleted = false;
 
             if (ModelState.IsValid)
             {

@@ -8,14 +8,15 @@
 
 @*<h4>Problem</h4>*@
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="col col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ProblemId" />
+            <input type="hidden" asp-for="ProblemId"/>
             <div class="form-group">
                 <label asp-for="ProblemTypeId" class="control-label"></label>
-                <select asp-for="ProblemTypeId" class="form-control" asp-items="ViewBag.ProblemTypeId"></select>
+                <select asp-for="ProblemTypeId" class="form-control text-center" asp-items="ViewBag.ProblemTypeId"></select>
                 <span asp-validation-for="ProblemTypeId" class="text-danger"></span>
             </div>
             @*<div class="form-group">
@@ -25,17 +26,28 @@
             </div>*@
             <div class="form-group">
                 <label asp-for="ProblemName" class="control-label"></label>
-                <input asp-for="ProblemName" class="form-control" />
+                <input asp-for="ProblemName" class="form-control"/>
                 <span asp-validation-for="ProblemName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProblemDetails" class="control-label"></label>
-                <input asp-for="ProblemDetails" class="form-control" />
+                <label asp-for="ProblemDetails" class="control-label text-center"> Problem Details</label>
+                @*<input asp-for="ProblemDetails" class="form-control" />*@
                 <span asp-validation-for="ProblemDetails" class="text-danger"></span>
+                <textarea class="form-control" asp-for="ProblemDetails"></textarea>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="ProblemDetails" class="control-label"></label>
+                <input asp-for="ProblemDetails" class="form-control"/>
+                <span asp-validation-for="ProblemDetails" class="text-danger"></span>
+            </div>*@
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive"/> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    <input class="form-check-input" asp-for="IsDeleted"/> @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>
             </div>
             @*<div class="form-group">
@@ -59,14 +71,19 @@
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success" />
+                <input type="submit" value="Save" class="btn btn-success btn-block"/>
             </div>
         </form>
     </div>
+    <div class="col col-md-3"></div>
 </div>
 
-<div>
-    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="text-center col-md-6">
+        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+    </div>
+    <div class="col col-md-3"></div>
 </div>
 
 @section Scripts {

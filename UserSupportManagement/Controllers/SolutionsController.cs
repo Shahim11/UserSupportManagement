@@ -22,7 +22,7 @@ namespace UserSupportManagement.Controllers
         // GET: Solutions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Solutions.Include(s => s.Problem).Include(s => s.StatusType);
+            var applicationDbContext = _context.Solutions.Include(s => s.Problem).Include(s => s.StatusType).Where(x => x.IsDeleted == false);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -62,6 +62,7 @@ namespace UserSupportManagement.Controllers
         public async Task<IActionResult> Create([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Solution solution)
         {
             solution.IsActive=true;
+            solution.IsDeleted = false;
 
             if (ModelState.IsValid)
             {
@@ -87,8 +88,8 @@ namespace UserSupportManagement.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemId", solution.ProblemId);
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId", solution.StatusTypeId);
+            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
             return View(solution);
         }
 
@@ -124,8 +125,8 @@ namespace UserSupportManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemId", solution.ProblemId);
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId", solution.StatusTypeId);
+            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
             return View(solution);
         }
 

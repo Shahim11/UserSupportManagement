@@ -4,33 +4,40 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center">Edit</h1>
 
-<h4>Solution</h4>
+@*<h4>Solution</h4>*@
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SolutionId" />
+            <input type="hidden" asp-for="SolutionId"/>
             <div class="form-group">
-                <label asp-for="ProblemId" class="control-label"></label>
-                <select asp-for="ProblemId" class="form-control" asp-items="ViewBag.ProblemId"></select>
+                <label asp-for="ProblemId" class="control-label">Problem Name</label>
+                <select asp-for="ProblemId" class="form-control text-center" asp-items="ViewBag.ProblemId"></select>
                 <span asp-validation-for="ProblemId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StatusTypeId" class="control-label"></label>
-                <select asp-for="StatusTypeId" class="form-control" asp-items="ViewBag.StatusTypeId"></select>
+                <label asp-for="StatusTypeId" class="control-label">Status Type Name</label>
+                <select asp-for="StatusTypeId" class="form-control text-center" asp-items="ViewBag.StatusTypeId"></select>
                 <span asp-validation-for="StatusTypeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SolutionDetails" class="control-label"></label>
-                <input asp-for="SolutionDetails" class="form-control" />
+                @*<input asp-for="SolutionDetails" class="form-control" />*@
                 <span asp-validation-for="SolutionDetails" class="text-danger"></span>
+                <textarea class="form-control" asp-for="SolutionDetails"></textarea>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    <input class="form-check-input" asp-for="IsActive"/> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted"/> @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>
             </div>
             @*<div class="form-group">
@@ -54,14 +61,19 @@
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-success btn-block"/>
             </div>
         </form>
     </div>
+    <div class="col col-md-3"></div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="text-center col-md-6">
+        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+    </div>
+    <div class="col col-md-3"></div>
 </div>
 
 @section Scripts {

@@ -25,7 +25,7 @@ namespace UserSupportManagement.Controllers
         // GET: StatusTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.StatusTypes.ToListAsync());
+            return View(await _context.StatusTypes.Where(x => x.IsDeleted == false).ToListAsync());
         }
 
         // GET: StatusTypes/Details/5
@@ -60,6 +60,7 @@ namespace UserSupportManagement.Controllers
         public async Task<IActionResult> Create([Bind("StatusTypeId,StatusTypeName,StatusTypeValue,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] StatusType statusType)
         {
             statusType.IsActive = true;
+            statusType.IsDeleted = false;
 
             if (ModelState.IsValid)
             {

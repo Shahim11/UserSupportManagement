@@ -25,7 +25,7 @@ namespace UserSupportManagement.Controllers
         // GET: Problems
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType);
+            var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -65,6 +65,7 @@ namespace UserSupportManagement.Controllers
         public async Task<IActionResult> Create([Bind("ProblemId,ProblemTypeId,StatusTypeId,ProblemName,ProblemDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Problem problem)
         {
             problem.IsActive = true;
+            problem.IsDeleted = false;
             problem.StatusTypeId = 1;
 
             if (ModelState.IsValid)

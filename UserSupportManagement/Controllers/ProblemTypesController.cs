@@ -25,7 +25,7 @@ namespace UserSupportManagement.Controllers
         // GET: ProblemTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ProblemTypes.ToListAsync());
+            return View(await _context.ProblemTypes.Where(x => x.IsDeleted == false).ToListAsync());
         }
 
         // GET: ProblemTypes/Details/5
@@ -60,6 +60,7 @@ namespace UserSupportManagement.Controllers
         public async Task<IActionResult> Create([Bind("ProblemTypeId,ProblemTypeName,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] ProblemType problemType)
         {
             problemType.IsActive = true;
+            problemType.IsDeleted = false;
 
             if (ModelState.IsValid)
             {

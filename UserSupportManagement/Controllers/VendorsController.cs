@@ -25,7 +25,7 @@ namespace UserSupportManagement.Controllers
         // GET: Vendors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Vendors.ToListAsync());
+            return View(await _context.Vendors.Where(x => x.IsDeleted == false).ToListAsync());
         }
 
         // GET: Vendors/Details/5
@@ -60,6 +60,7 @@ namespace UserSupportManagement.Controllers
         public async Task<IActionResult> Create([Bind("VendorId,VendorName,VendorDetails,VendorEmail,VendorPhoneNumber,VendorAddress,ContactPersonName,ContactPersonPhoneNumber,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Vendor vendor)
         {
             vendor.IsActive = true;
+            vendor.IsDeleted= false;
 
             if (ModelState.IsValid)
             {

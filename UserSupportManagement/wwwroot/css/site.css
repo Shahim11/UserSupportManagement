@@ -87,7 +87,8 @@ body {
 /* Navbar style
 -------------------------------------------------- */
 .navbar-bg {
-    background: linear-gradient(#98c598, #48b1bf);
+    /*background: linear-gradient(#98c598, #48b1bf);*/
+    background: linear-gradient(#08355E, #5b87b1);
 }
 
 .navbar .nav-item .nav-link {
@@ -109,9 +110,24 @@ body {
 /* Login Page style
 -------------------------------------------------- */
 .login-bg {
+    background-image: url(../img/loginbg2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    width: 98.5vw; 
+    margin-left: -6.4rem;
+    margin-right: -2rem;
+    margin-top: -1rem;
+    margin-bottom: -1rem;
+}
+
+.login-glass-bg {
     border: .1rem solid #eee;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
     border-radius: 1rem;
-    background: rgba(24,24,27, 0.6);
+    background: rgba(24, 24, 27, 0.33);
 }
 
 .box-style {

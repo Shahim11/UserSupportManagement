@@ -8,49 +8,56 @@
 
 @*<h4>Vendor</h4>*@
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="col col-md-6">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="VendorId" />
+            <input type="hidden" asp-for="VendorId"/>
             <div class="form-group">
-                <label asp-for="VendorName" class="control-label"></label>
-                <input asp-for="VendorName" class="form-control" />
+                <label asp-for="VendorName" class="control-label">Name</label>
+                <input asp-for="VendorName" class="form-control"/>
                 <span asp-validation-for="VendorName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VendorDetails" class="control-label"></label>
-                <input asp-for="VendorDetails" class="form-control" />
+                <label asp-for="VendorDetails" class="control-label">Details</label>
+                @*<input asp-for="VendorDetails" class="form-control" />*@
                 <span asp-validation-for="VendorDetails" class="text-danger"></span>
+                <textarea class="form-control" asp-for="VendorDetails"></textarea>
             </div>
             <div class="form-group">
-                <label asp-for="VendorEmail" class="control-label"></label>
-                <input asp-for="VendorEmail" class="form-control" />
+                <label asp-for="VendorEmail" class="control-label">Email</label>
+                <input asp-for="VendorEmail" class="form-control"/>
                 <span asp-validation-for="VendorEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VendorPhoneNumber" class="control-label"></label>
-                <input asp-for="VendorPhoneNumber" class="form-control" />
+                <label asp-for="VendorPhoneNumber" class="control-label">Phone Number</label>
+                <input asp-for="VendorPhoneNumber" class="form-control"/>
                 <span asp-validation-for="VendorPhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="VendorAddress" class="control-label"></label>
-                <input asp-for="VendorAddress" class="form-control" />
+                <label asp-for="VendorAddress" class="control-label">Address</label>
+                <input asp-for="VendorAddress" class="form-control"/>
                 <span asp-validation-for="VendorAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ContactPersonName" class="control-label"></label>
-                <input asp-for="ContactPersonName" class="form-control" />
+                <label asp-for="ContactPersonName" class="control-label">Contact Person Name</label>
+                <input asp-for="ContactPersonName" class="form-control"/>
                 <span asp-validation-for="ContactPersonName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ContactPersonPhoneNumber" class="control-label"></label>
-                <input asp-for="ContactPersonPhoneNumber" class="form-control" />
+                <label asp-for="ContactPersonPhoneNumber" class="control-label">Contact Person Phone Number</label>
+                <input asp-for="ContactPersonPhoneNumber" class="form-control"/>
                 <span asp-validation-for="ContactPersonPhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    <input class="form-check-input" asp-for="IsActive"/> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted"/> @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>
             </div>
             @*<div class="form-group">
@@ -74,14 +81,19 @@
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success" />
+                <input type="submit" value="Save" class="btn btn-success btn-block"/>
             </div>
         </form>
     </div>
+    <div class="col col-md-3"></div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+<div class="row justify-content-md-center">
+    <div class="col col-md-3"></div>
+    <div class="text-center col-md-6">
+        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+    </div>
+    <div class="col col-md-3"></div>
 </div>
 
 @section Scripts {
