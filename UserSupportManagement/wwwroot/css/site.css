@@ -30,9 +30,22 @@ html {
   font-size: 14px;
 }
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+        position: relative;
+        min-height: 100%;
+    }
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        white-space: nowrap;
+        line-height: 100px; /* Vertically center the text there */
+    }
+    .login-glass-bg {
+        margin-top: 5rem;
+        margin-bottom: 3rem;
+    }
 }
 
 .border-top {
@@ -63,6 +76,7 @@ body {
     margin-bottom: 60px;
     font-family: 'Poppins', sans-serif;
     /*background-color: #A1DFFF;*/
+    overflow-x: hidden;
 }
 .footer {
   position: absolute;
@@ -105,31 +119,49 @@ body {
 -------------------------------------------------- */
 .footer {
     background-color: rgba(0, 0, 0, 0.774);
+    z-index: 10;
 }
 
 /* Login Page style
 -------------------------------------------------- */
+.login-section {
+    width: 100vw;
+    height: 90vh;
+}
+
 .login-bg {
     background-image: url(../img/loginbg2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 100vh; 
-    width: 98.5vw; 
-    margin-left: -6.4rem;
-    margin-right: -2rem;
-    margin-top: -1rem;
-    margin-bottom: -1rem;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .login-glass-bg {
     border: .1rem solid #eee;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
     border-radius: 1rem;
     background: rgba(24, 24, 27, 0.33);
 }
 
 .box-style {
     border-radius: 20rem;
+}
+
+.home-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    width: 100vw;
+}
+
+.home-text h1 {
+    font-size: 4rem;
+}
+
+.home-bg {
+    background-color: #5b87b1;
 }

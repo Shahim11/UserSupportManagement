@@ -4,7 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="text-center">Create</h1>
+<div class="container">
+    <h1 class="text-center mt-3">Create</h1>
 
 @*<h4>Concern</h4>*@
 <hr />
@@ -63,6 +64,8 @@
     </div>
     <div class="col col-md-3"></div>
 </div>
+</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

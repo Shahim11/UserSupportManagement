@@ -36,7 +36,7 @@ namespace UserSupportManagement.Controllers
             {
                 return NotFound();
             }
-
+            
             var problem = await _context.Problems
                 .Include(p => p.ProblemType)
                 .Include(p => p.StatusType)
@@ -47,6 +47,7 @@ namespace UserSupportManagement.Controllers
             }
 
             return View(problem);
+
         }
 
         // GET: Problems/Create

@@ -4,42 +4,44 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1 class="text-center">Users List</h1>
-<br />
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Employee Code</th>
-        <th>Employee Name</th>
-        <th>Email</th>
-        <th>Roles</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var user in Model)
-    {
+<div class="container">
+    <h1 class="text-center mt-3">Users List</h1>
+    <br />
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <td>@user.EmployeeCode</td>
-            <td>@user.EmployeeName</td>
-            <td>@user.Email</td>
-            <td>@string.Join(" , ", user.Roles.ToList())</td>
-            @*<td>
+            <th>Employee Code</th>
+            <th>Employee Name</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.EmployeeCode</td>
+                <td>@user.EmployeeName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(" , ", user.Roles.ToList())</td>
+                @*<td>
                 <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Manage Roles</a>
             </td>*@
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Action
-                    </button>
-                    <div class="dropdown-menu shadow animated--grow-in">
-                        <a style='margin-right:16px' asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId" class="dropdown-item">
-                            <i class="fas fa-wrench"></i> Manage Roles
-                        </a>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                        </button>
+                        <div class="dropdown-menu shadow animated--grow-in">
+                            <a style='margin-right:16px' asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId" class="dropdown-item">
+                                <i class="fas fa-wrench"></i> Manage Roles
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
