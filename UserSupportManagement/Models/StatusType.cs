@@ -2,7 +2,7 @@
 
 namespace UserSupportManagement.Models
 {
-    public class StatusType:CreatedUpdated
+    public class StatusType : CreatedUpdated
     {
         [Key]
         public int StatusTypeId { get; set; }

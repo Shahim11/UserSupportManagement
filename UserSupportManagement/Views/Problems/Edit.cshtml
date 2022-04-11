@@ -3,88 +3,95 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<div class="container pb-5">
+    <h1 class="text-center mt-3">Edit</h1>
 
-<h1 class="text-center">Edit</h1>
-
-@*<h4>Problem</h4>*@
-<hr />
-<div class="row justify-content-md-center">
-    <div class="col col-md-3"></div>
-    <div class="col col-md-6">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ProblemId"/>
-            <div class="form-group">
-                <label asp-for="ProblemTypeId" class="control-label"></label>
-                <select asp-for="ProblemTypeId" class="form-control text-center" asp-items="ViewBag.ProblemTypeId"></select>
-                <span asp-validation-for="ProblemTypeId" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="StatusTypeId" class="control-label"></label>
-                <select asp-for="StatusTypeId" class="form-control" asp-items="ViewBag.StatusTypeId"></select>
-                <span asp-validation-for="StatusTypeId" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="ProblemName" class="control-label"></label>
-                <input asp-for="ProblemName" class="form-control"/>
-                <span asp-validation-for="ProblemName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProblemDetails" class="control-label text-center"> Problem Details</label>
-                @*<input asp-for="ProblemDetails" class="form-control" />*@
-                <span asp-validation-for="ProblemDetails" class="text-danger"></span>
-                <textarea class="form-control" asp-for="ProblemDetails"></textarea>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="ProblemDetails" class="control-label"></label>
-                <input asp-for="ProblemDetails" class="form-control"/>
-                <span asp-validation-for="ProblemDetails" class="text-danger"></span>
-            </div>*@
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive"/> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted"/> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModifiedDate" class="control-label"></label>
-                <input asp-for="ModifiedDate" class="form-control" />
-                <span asp-validation-for="ModifiedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModifiedBy" class="control-label"></label>
-                <input asp-for="ModifiedBy" class="form-control" />
-                <span asp-validation-for="ModifiedBy" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success btn-block"/>
-            </div>
-        </form>
+    @*<h4>Problem</h4>*@
+    <hr />
+    <div class="row justify-content-md-center">
+        <div class="col col-md-3"></div>
+        <div class="col col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ProblemId"/>
+                <div class="form-group mb-3">
+                    <label asp-for="ProblemTypeId" class="control-label">Problem Type Name</label>
+                    <select asp-for="ProblemTypeId" class="form-control text-center" asp-items="ViewBag.ProblemTypeId"></select>
+                    <span asp-validation-for="ProblemTypeId" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="StatusTypeId" class="control-label"></label>
+                    <select asp-for="StatusTypeId" class="form-control" asp-items="ViewBag.StatusTypeId"></select>
+                    <span asp-validation-for="StatusTypeId" class="text-danger"></span>
+                </div>*@
+                <div class="form-group mb-3">
+                    <label asp-for="ProblemName" class="control-label">Problem Name</label>
+                    <input asp-for="ProblemName" class="form-control"/>
+                    <span asp-validation-for="ProblemName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ProblemDetails" class="control-label text-center"> Problem Details</label>
+                    @*<input asp-for="ProblemDetails" class="form-control" />*@
+                    <span asp-validation-for="ProblemDetails" class="text-danger"></span>
+                    <textarea class="form-control" asp-for="ProblemDetails"></textarea>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="ProblemDetails" class="control-label"></label>
+                    <input asp-for="ProblemDetails" class="form-control"/>
+                    <span asp-validation-for="ProblemDetails" class="text-danger"></span>
+                </div>*@
+                <div class="form-group form-check mb-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsActive"/> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+                <div class="form-group form-check mb-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsDeleted"/> @Html.DisplayNameFor(model => model.IsDeleted)
+                    </label>
+                </div>
+                @*<div class="form-group">
+                    <label asp-for="CreatedDate" class="control-label"></label>
+                    <input asp-for="CreatedDate" class="form-control" />
+                    <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ModifiedDate" class="control-label"></label>
+                    <input asp-for="ModifiedDate" class="form-control" />
+                    <span asp-validation-for="ModifiedDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedBy" class="control-label"></label>
+                    <input asp-for="CreatedBy" class="form-control" />
+                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ModifiedBy" class="control-label"></label>
+                    <input asp-for="ModifiedBy" class="form-control" />
+                    <span asp-validation-for="ModifiedBy" class="text-danger"></span>
+                </div>*@
+                <div class="form-group text-center mb-3">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit" value="Create">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col col-md-3"></div>
     </div>
-    <div class="col col-md-3"></div>
+    
+    <div class="row justify-content-md-center">
+        <div class="col col-md-3"></div>
+        <div class="text-center col-md-6">
+            <div class="d-grid gap-2">
+                <a class="btn btn-primary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+        <div class="col col-md-3"></div>
+    </div>
 </div>
 
-<div class="row justify-content-md-center">
-    <div class="col col-md-3"></div>
-    <div class="text-center col-md-6">
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
-    </div>
-    <div class="col col-md-3"></div>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

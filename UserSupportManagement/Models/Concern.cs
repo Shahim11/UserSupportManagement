@@ -2,7 +2,7 @@
 
 namespace UserSupportManagement.Models
 {
-    public class Concern:CreatedUpdated
+    public class Concern : CreatedUpdated
     {
         [Key]
         public int ConcernId { get; set; }

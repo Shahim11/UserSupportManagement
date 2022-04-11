@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserSupportManagement.Models
 {
-    public class Order:CreatedUpdated
+    public class Order : CreatedUpdated
     {
         [Key]
         public int OrderId { get; set; }
@@ -25,7 +25,7 @@ namespace UserSupportManagement.Models
         public string OrderItemName { get; set; }
 
         public string OrderItemDetails { get; set; }
-        
+
         public string OrderItemQuantity { get; set; }
 
         public bool IsActive { get; set; }

@@ -12,51 +12,12 @@
     var role = await RoleManager.GetRoleNameAsync(Role);
 }*@
 
-
-<ul class="navbar-nav">
+<div class="d-flex">
+    @*<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>*@
+    <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    @if (User.IsInRole("SuperAdmin"))
-    {
-        <li class="">
-           <div class="btn-group">
-               <button type="button" class="btn btn-default dropdown-toggle text-white pr-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   Menu
-               </button>
-               <div class="dropdown-menu shadow animated--grow-in">    
-                   <a class="dropdown-item" asp-controller="UserRoles" asp-action="Index">Users</a>
-                   <a class="dropdown-item" asp-controller="Roles" asp-action="Index">Roles</a>
-                   <a class="dropdown-item" asp-controller="Concerns" asp-action="Index">Concerns</a>                                  
-                   <a class="dropdown-item" asp-controller="Vendors" asp-action="Index">Vendors</a>                   
-                   <a class="dropdown-item" asp-controller="ProblemTypes" asp-action="Index">ProblemTypes</a>
-                   <a class="dropdown-item" asp-controller="StatusTypes" asp-action="Index">StatusTypes</a>
-                   <a class="dropdown-item" asp-controller="Problems" asp-action="Index">Problems</a>
-                   <a class="dropdown-item" asp-controller="Solutions" asp-action="Index">Solutions</a>
-                   <a class="dropdown-item" asp-controller="Orders" asp-action="Index">Orders</a>
-               </div>
-           </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </li>
-    }
-
-    @if (User.IsInRole("Basic"))
-    {
-        <li class="mr-auto">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle text-white pr-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Menu
-                </button>
-                <div class="dropdown-menu shadow animated--grow-in">
-                    <a class="dropdown-item" asp-controller="Problems" asp-action="Index">Problems</a>
-                    <a class="dropdown-item" asp-controller="Solutions" asp-action="Index">Solutions</a>
-              
-                </div>
-            </div>
-        </li>
-    }
 
     <li class="nav-item">
         @*<a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @user.EmployeeName!</a>*@
@@ -78,3 +39,6 @@ else
     </li>
 }
 </ul>
+</div>
+
+

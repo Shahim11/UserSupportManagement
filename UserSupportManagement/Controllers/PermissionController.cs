@@ -65,7 +65,7 @@ namespace UserSupportManagement.Controllers
             {
                 await _roleManager.AddPermissionClaim(role, claim.Value);
             }
-            return RedirectToAction("Index","Roles",new { roleId = model.RoleId });
+            return RedirectToAction("Index", "Roles", new { roleId = model.RoleId });
             //return RedirectToAction(nameof(Index));
         }
     }

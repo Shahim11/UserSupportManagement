@@ -2,7 +2,7 @@
 
 namespace UserSupportManagement.Models
 {
-    public class Vendor:CreatedUpdated
+    public class Vendor : CreatedUpdated
     {
         [Key]
         public int VendorId { get; set; }

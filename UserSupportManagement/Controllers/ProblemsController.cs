@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,12 +42,38 @@ namespace UserSupportManagement.Controllers
                 .Include(p => p.ProblemType)
                 .Include(p => p.StatusType)
                 .FirstOrDefaultAsync(m => m.ProblemId == id);
+
+            var solution = _context.Solutions.FirstOrDefault(x => x.ProblemId == problem.ProblemId);
+
+            //var solution = _context.Solutions.FirstOrDefault(x => x.ProblemId == problem.ProblemId);
+
             if (problem == null)
             {
                 return NotFound();
             }
 
-            return View(problem);
+            var solutionViewModel = new SolutionViewModel();
+            solutionViewModel.ProblemId = problem.ProblemId;
+            solutionViewModel.ProblemName = problem.ProblemName;
+            solutionViewModel.ProblemTypeName = problem.ProblemType.ProblemTypeName;
+            solutionViewModel.StatusTypeName = problem.StatusType.StatusTypeName;
+            solutionViewModel.ProblemDetails = problem.ProblemDetails;
+            if (solution != null)
+            {
+                solutionViewModel.SolutionDetails = solution.SolutionDetails;
+            }
+            else
+            {
+                solutionViewModel.SolutionDetails = "Solution Isn't Created Yet!";
+            }
+            solutionViewModel.CreatedBy = problem.CreatedBy;
+            solutionViewModel.CreatedDate = problem.CreatedDate;
+            solutionViewModel.ModifiedBy = problem.ModifiedBy;
+            solutionViewModel.ModifiedDate = problem.ModifiedDate;
+            solutionViewModel.IsActive = problem.IsActive;
+            solutionViewModel.IsDeleted = problem.IsDeleted;
+
+            return View(solutionViewModel);
 
         }
 

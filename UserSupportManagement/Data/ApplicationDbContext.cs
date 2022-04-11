@@ -103,17 +103,18 @@ namespace UserSupportManagement.Data
             //var currentUsername = !string.IsNullOrEmpty(userId)
             //   ? userId
             //    : "Anonymous";
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var userName = _httpContextAccessor.HttpContext.User.Identity.Name;
+            //var userName = _httpContextAccessor.HttpContext.User.Identity.Name;
 
-            var currentUsername = !string.IsNullOrEmpty(userName) ? userName : "Anonymous";
+            var currentUserId = !string.IsNullOrEmpty(userId) ? userId : "Anonymous";
 
             foreach (var entity in entities)
             {
                 if (entity.State == EntityState.Added)
                 {
                     ((CreatedUpdated)entity.Entity).CreatedDate = DateTime.Now;
-                    ((CreatedUpdated)entity.Entity).CreatedBy = currentUsername;
+                    ((CreatedUpdated)entity.Entity).CreatedBy = currentUserId;
                 }
                 else
                 {
@@ -121,7 +122,7 @@ namespace UserSupportManagement.Data
                     entity.Property("CreatedBy").IsModified = false;
                 }
              ((CreatedUpdated)entity.Entity).ModifiedDate = DateTime.Now;
-                ((CreatedUpdated)entity.Entity).ModifiedBy = currentUsername;
+                ((CreatedUpdated)entity.Entity).ModifiedBy = currentUserId;
             }
         }
     }

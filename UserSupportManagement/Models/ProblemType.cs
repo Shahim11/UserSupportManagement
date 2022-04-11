@@ -2,7 +2,7 @@
 
 namespace UserSupportManagement.Models
 {
-    public class ProblemType:CreatedUpdated
+    public class ProblemType : CreatedUpdated
     {
         [Key]
         public int ProblemTypeId { get; set; }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UserSupportManagement.Models
 {
-    public class Problem:CreatedUpdated
+    public class Problem : CreatedUpdated
     {
         [Key]
         public int ProblemId { get; set; }

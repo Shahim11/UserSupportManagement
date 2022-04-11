@@ -84,26 +84,32 @@
                 @Html.DisplayFor(modelItem => item.ModifiedBy)
             </td>*@
             <td class="text-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                         Action
                     </button>
-                    <div class="dropdown-menu shadow animated--grow-in">
-                              
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Problems.View)).Result.Succeeded)
-                            {
-                                <a class="dropdown-item" asp-action="Details" asp-route-id="@item.ProblemId"><i class="fa-solid fa-circle-info"></i> Details</a>
-                            }
+                                                                        {
+                                                                            <li><button class="dropdown-item" type="button">
+                                                                            <a class="dropdown-item" asp-action="Details" asp-route-id="@item.ProblemId"><i class="fa-solid fa-circle-info"></i> Details</a>
+                                                                            </button></li>
+                        }
                         @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Problems.Edit)).Result.Succeeded)
-                            {
-                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.ProblemId"><i class="fas fa-pencil-alt"></i> Edit</a>
-                            }
+                                                                        {
+                                                                            <li><button class="dropdown-item" type="button">
+                                                                            <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.ProblemId"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                                                            </button></li>
+                        }
                         @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Problems.Delete)).Result.Succeeded)
-                            {
-                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.ProblemId"><i class="fas fa-trash-alt"></i> Delete</a>
-                            }                 
-                    </div>
+                                                                        {
+                                                                            <li><button class="dropdown-item" type="button">
+                                                                            <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.ProblemId"><i class="fas fa-trash-alt"></i> Delete</a>
+                                                                            </button></li>
+                        }
+                    </ul>
                 </div>
+                
             </td>
         </tr>
 }
