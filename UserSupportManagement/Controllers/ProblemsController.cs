@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,19 +17,34 @@ namespace UserSupportManagement.Controllers
     //[Authorize]
     public class ProblemsController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public ProblemsController(ApplicationDbContext context)
+        public ProblemsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
 
         // GET: Problems
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false);
-            return View(await applicationDbContext.ToListAsync());
+            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var role = User.IsInRole(userId);
+
+            if (User.IsInRole("SuperAdmin"))
+            {
+                var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false);
+                return View(await applicationDbContext.ToListAsync());
+            }
+
+            else
+            {
+                var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false).Where(o => o.CreatedBy == User.Identity.Name);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            
         }
 
         // GET: Problems/Details/5

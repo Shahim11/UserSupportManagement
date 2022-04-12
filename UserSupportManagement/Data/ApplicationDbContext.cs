@@ -103,6 +103,7 @@ namespace UserSupportManagement.Data
             //var currentUsername = !string.IsNullOrEmpty(userId)
             //   ? userId
             //    : "Anonymous";
+
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             //var userName = _httpContextAccessor.HttpContext.User.Identity.Name;

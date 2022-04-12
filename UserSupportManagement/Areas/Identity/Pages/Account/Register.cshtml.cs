@@ -17,7 +17,8 @@ using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Areas.Identity.Pages.Account
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
+    [Authorize(Roles = "SuperAdmin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;

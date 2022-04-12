@@ -39,6 +39,8 @@ namespace UserSupportManagement
             services.AddRazorPages();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
