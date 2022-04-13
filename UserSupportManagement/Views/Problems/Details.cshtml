@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @using UserSupportManagement.Constants
+@using Solution = Microsoft.CodeAnalysis.Solution
 @*@model UserSupportManagement.Models.Problem*@
 @model UserSupportManagement.Models.SolutionViewModel
 
@@ -35,6 +36,7 @@
                     @Html.DisplayFor(model => model.StatusTypeName)
                 </dd>
                 <hr />
+                
                 <dt class="col-sm-4">
                     ProblemDetails
                 </dt>
@@ -42,13 +44,18 @@
                     @Html.DisplayFor(model => model.ProblemDetails)
                 </dd>
                 <hr />
-                <dt class="col-sm-4">
-                    Solution Details
-                </dt>
-                <dd class="col-sm-8">
-                    @Html.DisplayFor(model => model.SolutionDetails)
-                </dd>
-                <hr />
+                
+                @if (Model.SolutionDetails != null)
+                {
+                    <dt class="col-sm-4">
+                        Solution Details
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.SolutionDetails)
+                    </dd>
+                    <hr />
+                }
+
                 <dt class="col-sm-4">
                     CreatedBy
                 </dt>

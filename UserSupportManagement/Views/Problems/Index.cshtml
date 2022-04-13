@@ -24,17 +24,24 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProblemType)
+                Problem Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StatusType)
+                Status Type
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProblemName)
+                Problem Name
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ProblemDetails)
-            </th>
+            </th>*@
+            @if (User.IsInRole("SuperAdmin"))
+            {
+                <th>
+                    Created User
+                </th>
+            }
+            
             @*<th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
@@ -65,9 +72,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProblemName)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ProblemDetails)
-            </td>
+            </td>*@
+            @if (User.IsInRole("SuperAdmin"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+            }
             @*<td>
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>

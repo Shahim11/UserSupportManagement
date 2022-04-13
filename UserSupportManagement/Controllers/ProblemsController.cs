@@ -30,21 +30,36 @@ namespace UserSupportManagement.Controllers
         // GET: Problems
         public async Task<IActionResult> Index()
         {
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var role = User.IsInRole(userId);
+            //var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            
+            var problem = _context.Problems.ToList();
+
+            var user = _context.Users.ToList();
+
+            foreach (var prob in problem)
+            {
+                var created = prob.CreatedBy;
+                var users = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == created);
+                
+                var empCode = users.EmployeeCode;
+
+                prob.CreatedBy = empCode;
+            }
 
             if (User.IsInRole("SuperAdmin"))
             {
                 var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false);
+                
                 return View(await applicationDbContext.ToListAsync());
             }
 
             else
             {
-                var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false).Where(o => o.CreatedBy == User.Identity.Name);
+                var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false).Where(o => o.CreatedBy == User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                
                 return View(await applicationDbContext.ToListAsync());
             }
-            
+
         }
 
         // GET: Problems/Details/5
@@ -79,10 +94,10 @@ namespace UserSupportManagement.Controllers
             {
                 solutionViewModel.SolutionDetails = solution.SolutionDetails;
             }
-            else
-            {
-                solutionViewModel.SolutionDetails = "Solution Isn't Created Yet!";
-            }
+            //else
+            //{
+            //    solutionViewModel.SolutionDetails = "Solution Isn't Created Yet!";
+            //}
             solutionViewModel.CreatedBy = problem.CreatedBy;
             solutionViewModel.CreatedDate = problem.CreatedDate;
             solutionViewModel.ModifiedBy = problem.ModifiedBy;

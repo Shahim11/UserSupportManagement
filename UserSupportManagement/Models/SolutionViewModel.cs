@@ -41,5 +41,7 @@ namespace UserSupportManagement.Models
         public string SolutionDetails { get; set; }
 
         //public Solution Solution { get; set; }
+
+        public string EmployeeCode { get; set; }
     }
 }
