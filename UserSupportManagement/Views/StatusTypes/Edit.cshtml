@@ -4,14 +4,15 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1 class="text-center">Edit</h1>
+<div class="container pb-5">
+    <h1 class="text-center mt-3">Edit</h1>
 
-@*<h4>StatusType</h4>*@
-<hr />
-<div class="row justify-content-md-center">
-    <div class="col col-md-3"></div>
-    <div class="col-md-6">
-        <form asp-action="Edit">
+    @*<h4>StatusTypes</h4>*@
+    <hr />
+    <div class="row justify-content-md-center">
+        <div class="col col-md-3"></div>
+        <div class="col col-md-6">
+            <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="StatusTypeId"/>
             <div class="form-group">
@@ -54,21 +55,29 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success btn-block"/>
+            <div class="form-group text-center mb-3">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" type="submit" value="Create">Create</button>
+                </div>
             </div>
         </form>
+            
+        </div>
+        <div class="col col-md-3"></div>
     </div>
-    <div class="col col-md-3"></div>
+    
+    <div class="row justify-content-md-center">
+        <div class="col col-md-3"></div>
+        <div class="text-center col-md-6">
+            <div class="d-grid gap-2">
+                <a class="btn btn-primary" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+        <div class="col col-md-3"></div>
+    </div>
 </div>
 
-<div class="row justify-content-md-center">
-    <div class="col col-md-3"></div>
-    <div class="text-center col-md-6">
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
-    </div>
-    <div class="col col-md-3"></div>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

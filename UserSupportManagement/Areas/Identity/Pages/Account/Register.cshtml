@@ -1,7 +1,9 @@
 ﻿@page
+@using UserSupportManagement.Models
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    var concern = (List<Concern>)ViewData["concern"];
 }
 
 <h1 class="text-center mt-5">@ViewData["Title"]</h1>
@@ -20,6 +22,19 @@
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+            @*<div class="form-group">
+                <label asp-for="Concern.ConcernId" class="control-label">Concern Name</label>
+                <option value="">--Select--</option>
+                <select asp-for="Concern.ConcernId" class="form-control text-center" asp-items="ViewBag.ConcernId">Concerns</select>
+            </div>*@
+            
+            <div class="form-group">
+                <label asp-for="Input.ConcernId">Concern Name</label>
+                <select asp-for="Input.ConcernId" class="form-control text-center" asp-items='new SelectList(concern, "ConcernId", "ConcernName")'>
+                    <option value="">--Select--</option>
+                </select>
+                <span asp-validation-for="Input.ConcernId" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
                 <input asp-for="Input.Password" class="form-control" />
@@ -30,6 +45,7 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+            
             <div class="d-grid gap-2 mt-3">
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>

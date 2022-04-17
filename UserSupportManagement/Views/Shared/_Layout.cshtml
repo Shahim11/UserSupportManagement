@@ -164,6 +164,86 @@
                             </li>
                         }
                         
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Menu
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                            <li><a class="dropdown-item" asp-controller="UserRoles" asp-action="Index">Users</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Roles" asp-action="Index">Roles</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Concerns" asp-action="Index">Concerns</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Vendors" asp-action="Index">Vendors</a></li>
+                                            <li><a class="dropdown-item" asp-controller="ProblemTypes" asp-action="Index">ProblemTypes</a></li>
+                                            <li><a class="dropdown-item" asp-controller="StatusTypes" asp-action="Index">StatusTypes</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Problems" asp-action="Index">Problems</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Solutions" asp-action="Index">Solutions</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Orders" asp-action="Index">Orders</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        
+                        @if (User.IsInRole("Support"))
+                        {
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Menu
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                            <li><a class="dropdown-item" asp-controller="Vendors" asp-action="Index">Vendors</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Problems" asp-action="Index">Problems</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Solutions" asp-action="Index">Solutions</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Orders" asp-action="Index">Orders</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        
+                        @if (User.IsInRole("SupplyChain"))
+                        {
+                            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Menu
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                                            <li><a class="dropdown-item" asp-controller="Vendors" asp-action="Index">Vendors</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Problems" asp-action="Index">Problems</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Solutions" asp-action="Index">Solutions</a></li>
+                                            <li><a class="dropdown-item" asp-controller="Orders" asp-action="Index">Orders</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+                        
                         
 
                     </ul>

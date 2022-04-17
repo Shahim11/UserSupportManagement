@@ -40,8 +40,8 @@ namespace UserSupportManagement.Controllers
             return View(userRolesViewModel);
         }
 
-        // GET: 
-        public async Task<IActionResult> Manage(string userId)
+        // GET: UserRoles/Edit
+        public async Task<IActionResult> Edit(string userId)
         {
             ViewBag.userId = userId;
             var user = await _userManager.FindByIdAsync(userId);
@@ -74,9 +74,9 @@ namespace UserSupportManagement.Controllers
             return View(model);
         }
 
-        // POST: 
+        // POST: UserRoles/Edit
         [HttpPost]
-        public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
+        public async Task<IActionResult> Edit(List<ManageUserRolesViewModel> model, string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
