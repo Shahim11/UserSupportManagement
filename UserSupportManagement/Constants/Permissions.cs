@@ -78,5 +78,14 @@ namespace UserSupportManagement.Constants
             public const string Delete = "Permissions.Orders.Delete";
         }
 
+        // [08] Permission For Employee
+        public static class Employees
+        {
+            public const string View = "Permissions.Employees.View";
+            public const string Create = "Permissions.Employees.Create";
+            public const string Edit = "Permissions.Employees.Edit";
+            public const string Delete = "Permissions.Employees.Delete";
+        }
+
     }
 }

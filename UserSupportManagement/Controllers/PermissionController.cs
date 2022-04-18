@@ -33,6 +33,7 @@ namespace UserSupportManagement.Controllers
             allPermissions.GetPermissions(typeof(Permissions.Problems), roleId);
             allPermissions.GetPermissions(typeof(Permissions.Solutions), roleId);
             allPermissions.GetPermissions(typeof(Permissions.Orders), roleId);
+            allPermissions.GetPermissions(typeof(Permissions.Employees), roleId);
 
             var role = await _roleManager.FindByIdAsync(roleId);
             model.Name = role.Name;
