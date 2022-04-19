@@ -80,51 +80,51 @@ namespace UserSupportManagement.Data
         }
 
 
-        //public override Task<int> SaveChangesAsync(
-        //                                    bool acceptAllChangesOnSuccess,
-        //                                    CancellationToken token = default)
-        //{
-        //    AddTimestamps();
-        //    return base.SaveChangesAsync(acceptAllChangesOnSuccess, token);
-        //}
+        public override Task<int> SaveChangesAsync(
+                                            bool acceptAllChangesOnSuccess,
+                                            CancellationToken token = default)
+        {
+            AddTimestamps();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, token);
+        }
 
-        //public override int SaveChanges()
-        //{
-        //    AddTimestamps();
-        //    return base.SaveChanges();
-        //}
+        public override int SaveChanges()
+        {
+            AddTimestamps();
+            return base.SaveChanges();
+        }
 
-        //private void AddTimestamps()
-        //{
-        //    var entities = ChangeTracker.Entries().Where(x => x.Entity is CreatedUpdated && (x.State == EntityState.Added || x.State == EntityState.Modified));
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is CreatedUpdated && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
-        //    //var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-        //    //var currentUsername = !string.IsNullOrEmpty(userId)
-        //    //   ? userId
-        //    //    : "Anonymous";
+            //var currentUsername = !string.IsNullOrEmpty(userId)
+            //   ? userId
+            //    : "Anonymous";
 
-        //    var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-        //    //var userName = _httpContextAccessor.HttpContext.User.Identity.Name;
+            //var userName = _httpContextAccessor.HttpContext.User.Identity.Name;
 
-        //    var currentUserId = !string.IsNullOrEmpty(userId) ? userId : "Anonymous";
+            var currentUserId = !string.IsNullOrEmpty(userId) ? userId : "Anonymous";
 
-        //    foreach (var entity in entities)
-        //    {
-        //        if (entity.State == EntityState.Added)
-        //        {
-        //            ((CreatedUpdated)entity.Entity).CreatedDate = DateTime.Now;
-        //            ((CreatedUpdated)entity.Entity).CreatedBy = currentUserId;
-        //        }
-        //        else
-        //        {
-        //            entity.Property("CreatedDate").IsModified = false;
-        //            entity.Property("CreatedBy").IsModified = false;
-        //        }
-        //     ((CreatedUpdated)entity.Entity).ModifiedDate = DateTime.Now;
-        //        ((CreatedUpdated)entity.Entity).ModifiedBy = currentUserId;
-        //    }
-        //}
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((CreatedUpdated)entity.Entity).CreatedDate = DateTime.Now;
+                    ((CreatedUpdated)entity.Entity).CreatedBy = currentUserId;
+                }
+                else
+                {
+                    entity.Property("CreatedDate").IsModified = false;
+                    entity.Property("CreatedBy").IsModified = false;
+                }
+             ((CreatedUpdated)entity.Entity).ModifiedDate = DateTime.Now;
+                ((CreatedUpdated)entity.Entity).ModifiedBy = currentUserId;
+            }
+        }
     }
 }

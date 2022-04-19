@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@using UserSupportManagement.Constants
+@model UserSupportManagement.Models.ApplicationUser
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="container pb-">
+    <h1 class="text-center mt-3">Details</h1>
+    <hr />
+    <div class="row justify-content-md-center">
+        <div class="col col-md-2"></div>
+        <div class="col col-md-8">
+            @*<h4>User</h4>*@
+            <dl class="row">
+                <dt class="col-sm-4">
+                    Employee Name
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EmployeeName)
+                </dd>
+                <dt class="col-sm-4">
+                    Employee Email
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-4">
+                    Employee Code
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EmployeeCode)
+                </dd>
+
+                <dt class="col-sm-4">
+                    Concern Name
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Concern.ConcernName)
+                </dd>
+
+                <dt class="col-sm-4">
+                    Employee Department
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EmployeeDepartment)
+                </dd>
+                <dt class="col-sm-4">
+                    Employee Designation
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EmployeeDesignation)
+                </dd>
+                <dt class="col-sm-4">
+                    Employee Phone Number
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+                
+                <dt class="col-sm-4">
+                    IsActive
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IsActive)
+                </dd>
+                @*<dt class="col-sm-4">
+                    IsDeleted
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.IsDeleted)
+                </dd>*@
+            </dl>
+        </div>
+        <div class="col col-md-2"></div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col col-md-3"></div>
+        <div class="col col-md-6">
+            @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Employees.Edit)).Result.Succeeded)
+            {
+                <div class="d-grid gap-2">
+                    <a class="btn btn-success mb-3" asp-controller="UserAccount" asp-action="Edit" asp-route-id="@Model.Id"><i class="fas fa-pencil-alt"></i> Edit </a>
+                </div>         
+            }
+            <div class="d-grid gap-2">
+                <a class="btn btn-primary mb-3" asp-controller="UserRoles" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+        <div class="col col-md-3"></div>
+    </div>
+</div>
+
+

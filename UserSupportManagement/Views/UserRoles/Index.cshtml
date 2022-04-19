@@ -7,7 +7,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
+<div class="container pb-5">
     <h1 class="text-center mt-3">Users List</h1>
     <br />
     <div class="createbutton">
@@ -47,6 +47,25 @@
                         <li><button class="dropdown-item" type="button">
                             <a class="dropdown-item" asp-controller="UserRoles" asp-action="Edit" asp-route-userId="@user.UserId"><i class="fas fa-wrench"></i> Manage Roles</a>
                         </button></li>
+                        
+                        @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Employees.View)).Result.Succeeded)
+                        {
+                            <li><button class="dropdown-item" type="button">
+                                <a class="dropdown-item" asp-controller="UserAccount" asp-action="Details" asp-route-id="@user.UserId"><i class="fa-solid fa-circle-info"></i> Details</a>
+                            </button></li>
+                        }
+                        @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Employees.Edit)).Result.Succeeded)
+                        {
+                            <li><button class="dropdown-item" type="button">
+                                <a class="dropdown-item" asp-controller="UserAccount" asp-action="Edit" asp-route-id="@user.UserId"><i class="fas fa-pencil-alt"></i> Edit</a>
+                            </button></li>
+                        }
+                        @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Employees.Delete)).Result.Succeeded)
+                        {
+                            <li><button class="dropdown-item" type="button">
+                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@user.UserId"><i class="fas fa-trash-alt"></i> Delete</a>
+                            </button></li>
+                        }
                     </ul>
                     </div>
                 </td>

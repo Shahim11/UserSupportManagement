@@ -46,7 +46,7 @@ namespace UserSupportManagement.Controllers
                 prob.CreatedBy = empCode;
             }
 
-            if (User.IsInRole("SuperAdmin"))
+            if(User.IsInRole("SuperAdmin") || User.IsInRole("Admin") || User.IsInRole("Support") || User.IsInRole("SupplyChain"))
             {
                 var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false);
                 
@@ -60,6 +60,30 @@ namespace UserSupportManagement.Controllers
                 return View(await applicationDbContext.ToListAsync());
             }
 
+        }
+
+        // GET: Problems Filter
+        public async Task<IActionResult> ProblemFilter()
+        {
+            //var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            var problem = _context.Problems.ToList();
+
+            var user = _context.Users.ToList();
+
+            foreach (var prob in problem)
+            {
+                var created = prob.CreatedBy;
+                var users = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == created);
+
+                var empCode = users.EmployeeCode;
+
+                prob.CreatedBy = empCode;
+            }
+
+            var applicationDbContext = _context.Problems.Include(p => p.ProblemType).Include(p => p.StatusType).Where(x => x.IsDeleted == false).Where(o => o.CreatedBy == User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Problems/Details/5
