@@ -62,7 +62,7 @@ namespace UserSupportManagement.Controllers
 
         }
 
-        // GET: Problems Filter
+        // GET: Problems/Filter
         public async Task<IActionResult> ProblemFilter()
         {
             //var currentUser = await _userManager.GetUserAsync(HttpContext.User);
@@ -86,7 +86,7 @@ namespace UserSupportManagement.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Problems/Details/5
+        // GET: Problems/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -163,7 +163,7 @@ namespace UserSupportManagement.Controllers
             return View(problem);
         }
 
-        // GET: Problems/Edit/5
+        // GET: Problems/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -181,7 +181,7 @@ namespace UserSupportManagement.Controllers
             return View(problem);
         }
 
-        // POST: Problems/Edit/5
+        // POST: Problems/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -224,7 +224,7 @@ namespace UserSupportManagement.Controllers
             return View(problem);
         }
 
-        // GET: Problems/Delete/5
+        // GET: Problems/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -244,13 +244,14 @@ namespace UserSupportManagement.Controllers
             return View(problem);
         }
 
-        // POST: Problems/Delete/5
+        // POST: Problems/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var problem = await _context.Problems.FindAsync(id);
-            _context.Problems.Remove(problem);
+            problem.IsDeleted = true;
+            //_context.Problems.Remove(problem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

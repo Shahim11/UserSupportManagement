@@ -12,7 +12,7 @@ using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Controllers
 {
-    //[Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class ConcernsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,7 +28,7 @@ namespace UserSupportManagement.Controllers
             return View(await _context.Concerns.Where(x => x.IsDeleted == false).ToListAsync());
         }
 
-        // GET: Concerns/Details/5
+        // GET: Concerns/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -72,7 +72,7 @@ namespace UserSupportManagement.Controllers
             return View(concern);
         }
 
-        // GET: Concerns/Edit/5
+        // GET: Concerns/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,7 +88,7 @@ namespace UserSupportManagement.Controllers
             return View(concern);
         }
 
-        // POST: Concerns/Edit/5
+        // POST: Concerns/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -124,7 +124,7 @@ namespace UserSupportManagement.Controllers
             return View(concern);
         }
 
-        // GET: Concerns/Delete/5
+        // GET: Concerns/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,13 +142,14 @@ namespace UserSupportManagement.Controllers
             return View(concern);
         }
 
-        // POST: Concerns/Delete/5
+        // POST: Concerns/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var concern = await _context.Concerns.FindAsync(id);
-            _context.Concerns.Remove(concern);
+            concern.IsDeleted = true;
+            //_context.Concerns.Remove(concern);
             await _context.SaveChangesAsync();
             TempData["success"] = "Deleted Successfully";
             return RedirectToAction(nameof(Index));

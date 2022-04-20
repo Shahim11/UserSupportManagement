@@ -12,7 +12,7 @@ using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin,Admin,Support")]
     public class ProblemTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,7 +28,7 @@ namespace UserSupportManagement.Controllers
             return View(await _context.ProblemTypes.Where(x => x.IsDeleted == false).ToListAsync());
         }
 
-        // GET: ProblemTypes/Details/5
+        // GET: ProblemTypes/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -71,7 +71,7 @@ namespace UserSupportManagement.Controllers
             return View(problemType);
         }
 
-        // GET: ProblemTypes/Edit/5
+        // GET: ProblemTypes/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,7 +87,7 @@ namespace UserSupportManagement.Controllers
             return View(problemType);
         }
 
-        // POST: ProblemTypes/Edit/5
+        // POST: ProblemTypes/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -122,7 +122,7 @@ namespace UserSupportManagement.Controllers
             return View(problemType);
         }
 
-        // GET: ProblemTypes/Delete/5
+        // GET: ProblemTypes/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,13 +140,14 @@ namespace UserSupportManagement.Controllers
             return View(problemType);
         }
 
-        // POST: ProblemTypes/Delete/5
+        // POST: ProblemTypes/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var problemType = await _context.ProblemTypes.FindAsync(id);
-            _context.ProblemTypes.Remove(problemType);
+            problemType.IsDeleted = true;
+            //_context.ProblemTypes.Remove(problemType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

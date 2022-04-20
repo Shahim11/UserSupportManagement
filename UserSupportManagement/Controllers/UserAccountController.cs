@@ -48,7 +48,7 @@ namespace UserSupportManagement.Controllers
             return View(user);
         }
 
-        // GET: User/Edit/5
+        // GET: User/Edit
 
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
@@ -83,7 +83,7 @@ namespace UserSupportManagement.Controllers
             return View(model);
         }
 
-        // POST: User/Edit/5
+        // POST: User/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         

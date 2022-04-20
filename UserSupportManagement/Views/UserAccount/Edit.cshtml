@@ -4,11 +4,13 @@
 @{
 }
 
+@using Microsoft.AspNetCore.Identity
 @model UserSupportManagement.Models.UserAccountViewModel
 
 @{
     ViewData["Title"] = "Edit";
     var concern = (List<Concern>)ViewData["concern"];
+    var role = (List<IdentityRole>)ViewData["role"];
 }
 
 
@@ -50,6 +52,13 @@
                     </select>
                     <span asp-validation-for="ConcernId" class="text-danger"></span>
                 </div>*@
+                
+                <div class="form-group">
+                    <label asp-for="RoleId"></label>
+                    <select asp-for="RoleId" class="form-control" asp-items='new SelectList(role,"Id","Name")'>
+                    </select>
+                    <span asp-validation-for="RoleId" class="text-danger"></span>
+                </div>
 
                 <div class="form-group">
                     <label asp-for="EmployeeDepartment" class="control-label">Employee Department</label>

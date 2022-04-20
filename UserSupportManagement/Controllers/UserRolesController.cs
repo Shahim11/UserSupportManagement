@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Services.UserAccountMapping;
+using UserSupportManagement.Data;
 using UserSupportManagement.Models;
 
 
@@ -16,11 +19,13 @@ namespace UserSupportManagement.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context;
 
-        public UserRolesController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public UserRolesController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
         public async Task<IActionResult> Index()
         {
@@ -43,35 +48,37 @@ namespace UserSupportManagement.Controllers
         // GET: UserRoles/Edit
         public async Task<IActionResult> Edit(string userId)
         {
-            ViewBag.userId = userId;
+            //ViewBag.userId = userId;
+
             var user = await _userManager.FindByIdAsync(userId);
+            var roles = await _userManager.GetRolesAsync(user);
+            
+           // var userRole = roles;
+            //var role = _context.Roles.Where(a=>a.Id==userRole.);
+
             if (user == null)
             {
                 ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
                 return View("NotFound");
             }
-            ViewBag.UserName = user.UserName;
-            ViewBag.EmpName = user.EmployeeName;
-            ViewBag.EmpId = user.EmployeeCode;
-            var model = new List<ManageUserRolesViewModel>();
-            foreach (var role in _roleManager.Roles)
+
+            var model = new ManageUserRolesViewModel()
             {
-                var userRolesViewModel = new ManageUserRolesViewModel
-                {
-                    RoleId = role.Id,
-                    RoleName = role.Name
-                };
-                if (await _userManager.IsInRoleAsync(user, role.Name))
-                {
-                    userRolesViewModel.Selected = true;
-                }
-                else
-                {
-                    userRolesViewModel.Selected = false;
-                }
-                model.Add(userRolesViewModel);
-            }
+                //Id = user.Id,
+                //RoleId = role.Id,
+                RoleName = roles.ToString(),
+                EmployeeName = user.EmployeeName,
+                EmployeeCode = user.EmployeeCode
+            };
+
+            ViewBag.RoleName = model.RoleName;
+            ViewBag.EmpName = model.EmployeeName;
+            ViewBag.EmpId = model.EmployeeCode;
+
+            //ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", role.Id);
+
             return View(model);
+
         }
 
         // POST: UserRoles/Edit

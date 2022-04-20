@@ -22,11 +22,22 @@ namespace UserSupportManagement.Controllers
         // GET: Solutions
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Solutions.Include(s => s.Problem).Include(s => s.StatusType).Where(x => x.IsDeleted == false);
-            return View(await applicationDbContext.ToListAsync());
+            if (User.IsInRole("SuperAdmin"))
+            {
+                var applicationDbContext = _context.Solutions.Include(s => s.Problem).Include(s => s.StatusType)
+                    .Where(x => x.IsDeleted == false);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var applicationDbContext = _context.Solutions.Include(s => s.Problem).Include(s => s.StatusType)
+                    .Where(x => x.IsActive == true);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            
         }
 
-        // GET: Solutions/Details/5
+        // GET: Solutions/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,8 +60,8 @@ namespace UserSupportManagement.Controllers
         // GET: Solutions/Create
         public IActionResult Create()
         {
-            ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName");
-            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName");
+            ViewData["ProblemId"] = new SelectList(_context.Problems.Where(x => x.IsActive == true).Where(a => a.IsDeleted == false), "ProblemId", "ProblemName");
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes.Where(x=>x.IsActive==true).Where(a => a.IsDeleted == false), "StatusTypeId", "StatusTypeName");
             return View();
         }
 
@@ -75,7 +86,7 @@ namespace UserSupportManagement.Controllers
             return View(solution);
         }
 
-        // GET: Solutions/Edit/5
+        // GET: Solutions/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,7 +104,7 @@ namespace UserSupportManagement.Controllers
             return View(solution);
         }
 
-        // POST: Solutions/Edit/5
+        // POST: Solutions/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -130,7 +141,7 @@ namespace UserSupportManagement.Controllers
             return View(solution);
         }
 
-        // GET: Solutions/Delete/5
+        // GET: Solutions/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,13 +161,14 @@ namespace UserSupportManagement.Controllers
             return View(solution);
         }
 
-        // POST: Solutions/Delete/5
+        // POST: Solutions/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var solution = await _context.Solutions.FindAsync(id);
-            _context.Solutions.Remove(solution);
+            solution.IsDeleted = true;
+            //_context.Solutions.Remove(solution);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

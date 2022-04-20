@@ -12,7 +12,7 @@ using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin,Admin,Support")]
     public class StatusTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -25,10 +25,17 @@ namespace UserSupportManagement.Controllers
         // GET: StatusTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.StatusTypes.Where(x => x.IsDeleted == false).ToListAsync());
+            if (User.IsInRole("SuperAdmin"))
+            {
+                return View(await _context.StatusTypes.Where(x => x.IsDeleted == false).ToListAsync());
+            }
+            else
+            {
+                return View(await _context.StatusTypes.Where(x => x.IsActive == true).ToListAsync());
+            }
         }
 
-        // GET: StatusTypes/Details/5
+        // GET: StatusTypes/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -71,7 +78,7 @@ namespace UserSupportManagement.Controllers
             return View(statusType);
         }
 
-        // GET: StatusTypes/Edit/5
+        // GET: StatusTypes/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,7 +94,7 @@ namespace UserSupportManagement.Controllers
             return View(statusType);
         }
 
-        // POST: StatusTypes/Edit/5
+        // POST: StatusTypes/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -122,7 +129,7 @@ namespace UserSupportManagement.Controllers
             return View(statusType);
         }
 
-        // GET: StatusTypes/Delete/5
+        // GET: StatusTypes/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -140,15 +147,27 @@ namespace UserSupportManagement.Controllers
             return View(statusType);
         }
 
-        // POST: StatusTypes/Delete/5
+        // POST: StatusTypes/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var statusType = await _context.StatusTypes.FindAsync(id);
-            _context.StatusTypes.Remove(statusType);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (User.IsInRole("SuperAdmin"))
+            {
+                var statusType = await _context.StatusTypes.FindAsync(id);
+                statusType.IsDeleted = true;
+                //_context.StatusTypes.Remove(statusType);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                var statusType = await _context.StatusTypes.FindAsync(id);
+                statusType.IsActive = false;
+                //_context.StatusTypes.Remove(statusType);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool StatusTypeExists(int id)

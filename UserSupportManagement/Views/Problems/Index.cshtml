@@ -82,7 +82,7 @@
                 @*<td>
                     @Html.DisplayFor(modelItem => item.ProblemDetails)
                 </td>*@
-                @if (User.IsInRole("SuperAdmin"))
+                @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin") ||User.IsInRole("Support") ||User.IsInRole("SupplyChain"))
                 {
                     <td>
                         @Html.DisplayFor(modelItem => item.CreatedBy)

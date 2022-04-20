@@ -56,33 +56,33 @@ namespace UserSupportManagement.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            //[Required]
-            //[Display(Name = "Employee Name")]
-            //public string EmployeeName { get; set; }
+            [Required]
+            [Display(Name = "Employee Name")]
+            public string EmployeeName { get; set; }
 
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
             
-            //[Phone]
-            //[Display(Name = "Phone Number")]
-            //public string PhoneNumber { get; set; }
+            [Phone]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
 
-            //[Required]
-            //[Display(Name = "Employee Code")]
-            //public string EmployeeCode { get; set; }
+            [Required]
+            [Display(Name = "Employee Code")]
+            public string EmployeeCode { get; set; }
 
-            //[Display(Name = "Department")]
-            //public string EmployeeDepartment { get; set; }
+            [Display(Name = "Department")]
+            public string EmployeeDepartment { get; set; }
 
-            //[Display(Name = "Designation")]
-            //public string EmployeeDesignation { get; set; }
+            [Display(Name = "Designation")]
+            public string EmployeeDesignation { get; set; }
 
-            //[Required]
-            //[DataType(DataType.Date)]
-            //[Display(Name = "Date of Birth")]
-            //public DateTime EmployeeDOB { get; set; }
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Date of Birth")]
+            public DateTime EmployeeDOB { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -99,15 +99,15 @@ namespace UserSupportManagement.Areas.Identity.Pages.Account
             [Display(Name = "Concern Name")]
             public int ConcernId { get; set; }
 
-            //[Required]
-            //[Display(Name = "Role Name")]
-            //public string RoleId { get; set; }
+            [Required]
+            [Display(Name = "Role Name")]
+            public string RoleId { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ViewData["concern"] = _context.Concerns.ToList();
-            //ViewData["role"] = _context.Roles.ToList();
+            ViewData["role"] = _context.Roles.ToList();
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -122,7 +122,7 @@ namespace UserSupportManagement.Areas.Identity.Pages.Account
                 var concerns = _context.Concerns;
                 var concern = concerns.FindAsync(Input.ConcernId).Result;
 
-                // var role = _roleManager.FindByIdAsync(Input.RoleId).Result;
+                var role = _roleManager.FindByIdAsync(Input.RoleId).Result;
 
                 //var user = new ApplicationUser
                 //{

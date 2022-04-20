@@ -28,7 +28,7 @@ namespace UserSupportManagement.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Orders/Details/5
+        // GET: Orders/Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -80,7 +80,7 @@ namespace UserSupportManagement.Controllers
             return View(order);
         }
 
-        // GET: Orders/Edit/5
+        // GET: Orders/Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -99,7 +99,7 @@ namespace UserSupportManagement.Controllers
             return View(order);
         }
 
-        // POST: Orders/Edit/5
+        // POST: Orders/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -137,7 +137,7 @@ namespace UserSupportManagement.Controllers
             return View(order);
         }
 
-        // GET: Orders/Delete/5
+        // GET: Orders/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -158,13 +158,14 @@ namespace UserSupportManagement.Controllers
             return View(order);
         }
 
-        // POST: Orders/Delete/5
+        // POST: Orders/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var order = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(order);
+            order.IsDeleted = true;
+            //_context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -29,10 +29,15 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.StatusTypeValue)
             </th>*@
+            
+            @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+            }
+
             @*<th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CreatedDate)
             </th>
             <th>
@@ -56,10 +61,14 @@
             @*<td>
                 @Html.DisplayFor(modelItem => item.StatusTypeValue)
             </td>*@
+            @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+            }
+
             @*<td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
