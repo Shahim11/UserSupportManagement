@@ -31,7 +31,17 @@ namespace UserSupportManagement.Controllers
         // GET: UserRoles
         public async Task<IActionResult> Index()
         {
-            var users = await _userManager.Users.Where(x => x.EmployeeName != "Super Admin").ToListAsync();
+            //var users = await _userManager.Users.Where(x => x.EmployeeName != "Super Admin").ToListAsync();
+
+            var users = await (from user in _context.Users
+                    join userRole in _context.UserRoles
+                        on user.Id equals userRole.UserId
+                    join role in _context.Roles
+                        on userRole.RoleId equals role.Id
+                    where role.Name != "SuperAdmin"
+                    select user)
+                .ToListAsync();
+
             var userRolesViewModel = new List<UserRolesViewModel>();
             foreach (ApplicationUser user in users)
             {
@@ -47,35 +57,113 @@ namespace UserSupportManagement.Controllers
             return View(userRolesViewModel);
         }
 
-        //// GET: UserRoles/Filter/SuperAdmin
-        //public async Task<IActionResult> SuperAdminFilter()
-        //{
+        // GET: UserRoles/Filter/Basic
+        public async Task<IActionResult> FilterBasicRole()
+        {
+            var users = await (from user in _context.Users
+                    join userRole in _context.UserRoles
+                        on user.Id equals userRole.UserId
+                    join role in _context.Roles
+                        on userRole.RoleId equals role.Id
+                    where role.Name == "Basic"
+                    select user)
+                .ToListAsync();
 
-        //}
+            var userRolesViewModel = new List<UserRolesViewModel>();
+            foreach (ApplicationUser user in users)
+            {
+                var thisViewModel = new UserRolesViewModel();
+                thisViewModel.UserId = user.Id;
+                thisViewModel.EmployeeCode = user.EmployeeCode;
+                thisViewModel.EmployeeName = user.EmployeeName;
+                thisViewModel.UserId = user.Id;
+                thisViewModel.Email = user.Email;
+                thisViewModel.Roles = await GetUserRoles(user);
+                userRolesViewModel.Add(thisViewModel);
+            }
+            return View(userRolesViewModel);
+        }
 
-        //// GET: UserRoles/Filter/Admin
-        //public async Task<IActionResult> AdminFilter()
-        //{
-           
-        //}
+        // GET: UserRoles/Filter/Admin
+        public async Task<IActionResult> FilterAdminRole()
+        {
+            var users = await (from user in _context.Users
+                    join userRole in _context.UserRoles
+                        on user.Id equals userRole.UserId
+                    join role in _context.Roles
+                        on userRole.RoleId equals role.Id
+                    where role.Name == "Admin"
+                    select user)
+                .ToListAsync();
 
-        //// GET: UserRoles/Filter/BasicUser
-        //public async Task<IActionResult> BasicFilter()
-        //{
-            
-        //}
+            var userRolesViewModel = new List<UserRolesViewModel>();
+            foreach (ApplicationUser user in users)
+            {
+                var thisViewModel = new UserRolesViewModel();
+                thisViewModel.UserId = user.Id;
+                thisViewModel.EmployeeCode = user.EmployeeCode;
+                thisViewModel.EmployeeName = user.EmployeeName;
+                thisViewModel.UserId = user.Id;
+                thisViewModel.Email = user.Email;
+                thisViewModel.Roles = await GetUserRoles(user);
+                userRolesViewModel.Add(thisViewModel);
+            }
+            return View(userRolesViewModel);
+        }
 
-        //// GET: UserRoles/Filter/Support
-        //public async Task<IActionResult> SupportFilter()
-        //{
-           
-        //}
+        // GET: UserRoles/Filter/Support
+        public async Task<IActionResult> FilterSupportRole()
+        {
+            var users = await (from user in _context.Users
+                    join userRole in _context.UserRoles
+                        on user.Id equals userRole.UserId
+                    join role in _context.Roles
+                        on userRole.RoleId equals role.Id
+                    where role.Name == "Support"
+                               select user)
+                .ToListAsync();
 
-        //// GET: UserRoles/Filter/SupplyChain
-        //public async Task<IActionResult> SupplyChainFilter()
-        //{
-            
-        //}
+            var userRolesViewModel = new List<UserRolesViewModel>();
+            foreach (ApplicationUser user in users)
+            {
+                var thisViewModel = new UserRolesViewModel();
+                thisViewModel.UserId = user.Id;
+                thisViewModel.EmployeeCode = user.EmployeeCode;
+                thisViewModel.EmployeeName = user.EmployeeName;
+                thisViewModel.UserId = user.Id;
+                thisViewModel.Email = user.Email;
+                thisViewModel.Roles = await GetUserRoles(user);
+                userRolesViewModel.Add(thisViewModel);
+            }
+            return View(userRolesViewModel);
+        }
+
+        // GET: UserRoles/Filter/SupplyChain
+        public async Task<IActionResult> FilterSupplyChainRole()
+        {
+            var users = await (from user in _context.Users
+                    join userRole in _context.UserRoles
+                        on user.Id equals userRole.UserId
+                    join role in _context.Roles
+                        on userRole.RoleId equals role.Id
+                    where role.Name == "SupplyChain"
+                               select user)
+                .ToListAsync();
+
+            var userRolesViewModel = new List<UserRolesViewModel>();
+            foreach (ApplicationUser user in users)
+            {
+                var thisViewModel = new UserRolesViewModel();
+                thisViewModel.UserId = user.Id;
+                thisViewModel.EmployeeCode = user.EmployeeCode;
+                thisViewModel.EmployeeName = user.EmployeeName;
+                thisViewModel.UserId = user.Id;
+                thisViewModel.Email = user.Email;
+                thisViewModel.Roles = await GetUserRoles(user);
+                userRolesViewModel.Add(thisViewModel);
+            }
+            return View(userRolesViewModel);
+        }
 
         // GET: UserRoles/Edit
         public async Task<IActionResult> Edit(string userId)
