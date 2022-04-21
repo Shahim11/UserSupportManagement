@@ -99,15 +99,15 @@ namespace UserSupportManagement.Areas.Identity.Pages.Account
             [Display(Name = "Concern Name")]
             public int ConcernId { get; set; }
 
-            [Required]
-            [Display(Name = "Role Name")]
-            public string RoleId { get; set; }
+            //[Required]
+            //[Display(Name = "Role Name")]
+            //public string RoleId { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ViewData["concern"] = _context.Concerns.ToList();
-            ViewData["role"] = _context.Roles.ToList();
+            //ViewData["role"] = _context.Roles.ToList();
 
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -122,31 +122,33 @@ namespace UserSupportManagement.Areas.Identity.Pages.Account
                 var concerns = _context.Concerns;
                 var concern = concerns.FindAsync(Input.ConcernId).Result;
 
-                var role = _roleManager.FindByIdAsync(Input.RoleId).Result;
-
-                //var user = new ApplicationUser
-                //{
-                //UserName = Input.Email,
-                //Email = Input.Email,
-                //EmployeeName = Input.EmployeeName,
-                //EmployeeCode = Input.EmployeeCode,
-                //EmployeeDOB = Input.EmployeeDOB,
-                //EmployeeDepartment = Input.EmployeeDepartment,
-                //EmployeeDesignation = Input.EmployeeDesignation,
-                //PhoneNumber = Input.PhoneNumber,
-                //ConcernId = concern.ConcernId};
+                //var role = _roleManager.FindByIdAsync(Input.RoleId).Result;
 
                 var user = new ApplicationUser
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
+                    EmployeeName = Input.EmployeeName,
+                    EmployeeCode = Input.EmployeeCode,
+                    EmployeeDOB = Input.EmployeeDOB,
+                    EmployeeDepartment = Input.EmployeeDepartment,
+                    EmployeeDesignation = Input.EmployeeDesignation,
+                    PhoneNumber = Input.PhoneNumber,
                     ConcernId = concern.ConcernId
                 };
+
+                //var user = new ApplicationUser
+                //{
+                //    UserName = Input.Email,
+                //    Email = Input.Email,
+                //    ConcernId = concern.ConcernId
+                //};
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     //_logger.LogInformation("User created a new account with password.");
-                    //await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                    await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

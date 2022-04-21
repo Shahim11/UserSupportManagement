@@ -27,6 +27,8 @@ namespace UserSupportManagement.Controllers
             _userManager = userManager;
             _context = context;
         }
+
+        // GET: UserRoles
         public async Task<IActionResult> Index()
         {
             var users = await _userManager.Users.Where(x => x.EmployeeName != "Super Admin").ToListAsync();
@@ -45,16 +47,45 @@ namespace UserSupportManagement.Controllers
             return View(userRolesViewModel);
         }
 
+        //// GET: UserRoles/Filter/SuperAdmin
+        //public async Task<IActionResult> SuperAdminFilter()
+        //{
+
+        //}
+
+        //// GET: UserRoles/Filter/Admin
+        //public async Task<IActionResult> AdminFilter()
+        //{
+           
+        //}
+
+        //// GET: UserRoles/Filter/BasicUser
+        //public async Task<IActionResult> BasicFilter()
+        //{
+            
+        //}
+
+        //// GET: UserRoles/Filter/Support
+        //public async Task<IActionResult> SupportFilter()
+        //{
+           
+        //}
+
+        //// GET: UserRoles/Filter/SupplyChain
+        //public async Task<IActionResult> SupplyChainFilter()
+        //{
+            
+        //}
+
         // GET: UserRoles/Edit
         public async Task<IActionResult> Edit(string userId)
         {
-            //ViewBag.userId = userId;
-
+            ViewBag.userId = userId;
             var user = await _userManager.FindByIdAsync(userId);
-            var roles = await _userManager.GetRolesAsync(user);
-            
-           // var userRole = roles;
-            //var role = _context.Roles.Where(a=>a.Id==userRole.);
+
+            var currentRoles = await _userManager.GetRolesAsync(user);
+            ViewBag.RoleName = currentRoles[0];
+
 
             if (user == null)
             {
@@ -62,21 +93,28 @@ namespace UserSupportManagement.Controllers
                 return View("NotFound");
             }
 
-            var model = new ManageUserRolesViewModel()
+            ViewBag.UserName = user.UserName;
+            ViewBag.EmpName = user.EmployeeName;
+            ViewBag.EmpId = user.EmployeeCode;
+
+            var model = new List<ManageUserRolesViewModel>();
+            foreach (var role in _roleManager.Roles.Where(a=>a.Name!="SuperAdmin"))
             {
-                //Id = user.Id,
-                //RoleId = role.Id,
-                RoleName = roles.ToString(),
-                EmployeeName = user.EmployeeName,
-                EmployeeCode = user.EmployeeCode
-            };
-
-            ViewBag.RoleName = model.RoleName;
-            ViewBag.EmpName = model.EmployeeName;
-            ViewBag.EmpId = model.EmployeeCode;
-
-            //ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleName", role.Id);
-
+                var userRolesViewModel = new ManageUserRolesViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.Selected = true;
+                }
+                else
+                {
+                    userRolesViewModel.Selected = false;
+                }
+                model.Add(userRolesViewModel);
+            }
             return View(model);
 
         }

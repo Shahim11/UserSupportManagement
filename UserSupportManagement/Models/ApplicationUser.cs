@@ -6,6 +6,8 @@ namespace UserSupportManagement.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        internal object Roles;
+
         public string EmployeeName { get; set; }
 
         public string EmployeeCode { get; set; }
