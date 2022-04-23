@@ -1,4 +1,10 @@
-﻿@model UserSupportManagement.Models.Solution
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model UserSupportManagement.Models.Solution
 
 @{
     ViewData["Title"] = "Create";
@@ -16,7 +22,7 @@
             <div class="form-group">
                 <input asp-for="ProblemId" type="hidden"/>
                 <label asp-for="ProblemId" class="control-label"></label>
-                <input readonly type="text" asp-for="ProblemId" class="form-control text-center" value="@ViewBag.ProblemName" asp-route-ProblemId="@ViewBag.ProblemId">
+                <input readonly type="text" asp-for="ProblemId" class="form-control text-center" value="@ViewBag.ProblemId" asp-route-ProblemId="@ViewBag.ProblemId">
                 <span asp-validation-for="ProblemId" class="text-danger"></span>
             </div>
             <div class="form-group">

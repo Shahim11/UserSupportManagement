@@ -107,7 +107,7 @@ namespace UserSupportManagement.Controllers
             {
                 return NotFound();
             }
-
+            
             var solutionViewModel = new SolutionViewModel();
             solutionViewModel.ProblemId = problem.ProblemId;
             solutionViewModel.ProblemName = problem.ProblemName;
@@ -128,6 +128,8 @@ namespace UserSupportManagement.Controllers
             solutionViewModel.ModifiedDate = problem.ModifiedDate;
             solutionViewModel.IsActive = problem.IsActive;
             solutionViewModel.IsDeleted = problem.IsDeleted;
+
+            TempData["ProblemId"] = solutionViewModel.ProblemId; 
 
             return View(solutionViewModel);
 
@@ -161,6 +163,48 @@ namespace UserSupportManagement.Controllers
             ViewData["ProblemTypeId"] = new SelectList(_context.ProblemTypes, "ProblemTypeId", "ProblemTypeName", problem.ProblemTypeId);
             ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", problem.StatusTypeId);
             return View(problem);
+        }
+
+        // GET: Solutions/Create
+        public IActionResult SolutionCreate()
+        {
+            // var pid = Request.Query["id"];
+            //var problem = _context.Problems.FirstOrDefault(x => x.ProblemId == Convert.ToInt32(pid));
+            //ViewBag.ProblemName = problem.ProblemName;
+            //ViewBag.ProblemId = problem.ProblemId;
+            int ProblemId = Convert.ToInt32(TempData["ProblemId"]);
+            ViewBag.ProblemId = ProblemId;
+
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes.Where(x => x.IsActive == true).Where(a => a.IsDeleted == false), "StatusTypeId", "StatusTypeName");
+
+            return View();
+        }
+
+        // POST: Solutions/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SolutionCreate([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Solution solution)
+        {
+            solution.IsActive = true;
+            solution.IsDeleted = false;
+
+            int ProblemId = Convert.ToInt32(TempData["ProblemId"]);
+            //var pid = Request.Query["problemId"];
+            solution.ProblemId = ProblemId;
+
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(solution);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            //ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
+            return View(solution);
         }
 
         // GET: Problems/Edit

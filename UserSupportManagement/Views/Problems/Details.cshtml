@@ -4,18 +4,22 @@
 @using Solution = Microsoft.CodeAnalysis.Solution
 @*@model UserSupportManagement.Models.Problem*@
 @model UserSupportManagement.Models.SolutionViewModel
+@*@model IEnumerable<SolutionViewModel>*@
 
 
 @{
     ViewData["Title"] = "Details";
 }
+
 <div class="container pb-3">
     <h1 class="text-center mt-3">Details</h1>
     <hr />
+    
     <div class="row justify-content-md-center">
         <div class="col col-md-2"></div>
         <div class="col col-md-8">
             @*<h4>Problem</h4>*@
+        
             <dl class="row">
                 <dt class="col-sm-4">
                     ProblemName
@@ -35,16 +39,16 @@
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.StatusTypeName)
                 </dd>
-                <hr />
-                
+                <hr/>
+
                 <dt class="col-sm-4">
                     ProblemDetails
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.ProblemDetails)
                 </dd>
-                <hr />
-                
+                <hr/>
+
                 @if (Model.SolutionDetails != null)
                 {
                     <dt class="col-sm-4">
@@ -53,9 +57,9 @@
                     <dd class="col-sm-8">
                         @Html.DisplayFor(model => model.SolutionDetails)
                     </dd>
-                    <hr />
+                    <hr/>
                 }
-                
+
                 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
                 {
                     <dt class="col-sm-4">
@@ -96,7 +100,9 @@
                     </dd>
                 }
             </dl>
-        </div>
+        
+            </div>
+        
         <div class="col col-md-2"></div>
     </div>
     <div class="row justify-content-md-center">
@@ -107,11 +113,12 @@
                 @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Solutions.Create)).Result.Succeeded)
                 {
                     <div class="d-grid gap-2">
-                        <a class="btn btn-success mb-3" asp-controller="Solutions" asp-action="Create"><i class="fa-solid fa-circle-plus"></i> Create Solution</a>
+                        @*<a class="btn btn-success mb-3" asp-controller="Solutions" asp-action="Create" asp-route-id="@Model.ProblemId"><i class="fa-solid fa-circle-plus"></i> Create Solution</a>*@
+                        <a class="btn btn-success mb-3" asp-controller="Problems" asp-action="SolutionCreate"><i class="fa-solid fa-circle-plus"></i> Create Solution</a>
                     </div>
                 }
             }
-
+            
             @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Problems.Edit)).Result.Succeeded)
             {
                 <div class="d-grid gap-2">
@@ -125,5 +132,6 @@
         </div>
         <div class="col col-md-3"></div>
     </div>
+    
 </div>
 
