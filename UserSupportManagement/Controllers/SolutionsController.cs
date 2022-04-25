@@ -57,44 +57,44 @@ namespace UserSupportManagement.Controllers
             return View(solution);
         }
 
-        //// GET: Solutions/Create
-        //public IActionResult Create()
-        //{
-        //   // var pid = Request.Query["id"];
-        //    //var problem = _context.Problems.FirstOrDefault(x => x.ProblemId == Convert.ToInt32(pid));
-        //    //ViewBag.ProblemName = problem.ProblemName;
-        //    //ViewBag.ProblemId = problem.ProblemId;
+        // GET: Solutions/Create
+        public IActionResult Create()
+        {
+            // var pid = Request.Query["id"];
+            //var problem = _context.Problems.FirstOrDefault(x => x.ProblemId == Convert.ToInt32(pid));
+            //ViewBag.ProblemName = problem.ProblemName;
+            //ViewBag.ProblemId = problem.ProblemId;
 
-        //    ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes.Where(x=>x.IsActive==true).Where(a => a.IsDeleted == false), "StatusTypeId", "StatusTypeName");
-            
-        //    return View();
-        //}
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes.Where(x => x.IsActive == true).Where(a => a.IsDeleted == false), "StatusTypeId", "StatusTypeName");
 
-        //// POST: Solutions/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Solution solution)
-        //{
-        //    solution.IsActive=true;
-        //    solution.IsDeleted = false;
+            return View();
+        }
 
-        //    //var pid = Request.Query["problemId"];
-        //    //solution.ProblemId = Convert.ToInt32(pid);
-            
+        // POST: Solutions/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Solution solution)
+        {
+            solution.IsActive = true;
+            solution.IsDeleted = false;
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(solution);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-            
-        //    //ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
-        //    ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
-        //    return View(solution);
-        //}
+            //var pid = Request.Query["problemId"];
+            //solution.ProblemId = Convert.ToInt32(pid);
+
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(solution);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            //ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
+            return View(solution);
+        }
 
         // GET: Solutions/Edit
         public async Task<IActionResult> Edit(int? id)

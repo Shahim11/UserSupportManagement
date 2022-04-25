@@ -17,23 +17,23 @@
 <div class="row justify-content-md-center">
     <div class="col col-md-3"></div>
     <div class="col col-md-6">
-        <form asp-action="Create">
+        <form asp-action="Create" asp-controller="Solutions" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="ProblemId" type="hidden"/>
+            <div class="form-group mb-3">
+                <input asp-for="ProblemId" value="@ViewBag.ProblemId" type="hidden"/>
                 <label asp-for="ProblemId" class="control-label"></label>
-                <input readonly type="text" asp-for="ProblemId" class="form-control text-center" value="@ViewBag.ProblemId" asp-route-ProblemId="@ViewBag.ProblemId">
+                <input readonly type="text" class="form-control text-center" value="@ViewBag.ProblemName"/> 
                 <span asp-validation-for="ProblemId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="StatusTypeId" class="control-label"></label>
                 <select asp-for="StatusTypeId" class="form-control text-center" asp-items="ViewBag.StatusTypeId"></select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-5">
                 <label asp-for="SolutionDetails" class="control-label"></label>
                 @*<input asp-for="SolutionDetails" class="form-control" />*@
                 <span asp-validation-for="SolutionDetails" class="text-danger"></span>
-                <textarea class="form-control" asp-for="SolutionDetails"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6.5" asp-for="SolutionDetails"></textarea>
             </div>
             @*<div class="form-group form-check">
                 <label class="form-check-label">
@@ -60,18 +60,22 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success btn-block"/>
+            <div class="form-group text-center mb-3">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" type="submit" value="Create">Create</button>
+                </div>
             </div>
         </form>
     </div>
     <div class="col col-md-3"></div>
 </div>
 
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center mb-5">
     <div class="col col-md-3"></div>
     <div class="text-center col-md-6">
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
     </div>
     <div class="col col-md-3"></div>
 </div>

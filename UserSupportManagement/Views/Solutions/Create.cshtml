@@ -27,7 +27,7 @@
                 <label asp-for="SolutionDetails" class="control-label"></label>
                 @*<input asp-for="SolutionDetails" class="form-control" />*@
                 <span asp-validation-for="SolutionDetails" class="text-danger"></span>
-                <textarea class="form-control" asp-for="SolutionDetails"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6.5" asp-for="SolutionDetails"></textarea>
             </div>
             @*<div class="form-group form-check">
                 <label class="form-check-label">
@@ -54,8 +54,10 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success btn-block"/>
+            <div class="form-group text-center mb-3">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" type="submit" value="Create">Create</button>
+                </div>
             </div>
         </form>
     </div>
@@ -65,10 +67,13 @@
 <div class="row justify-content-md-center">
     <div class="col col-md-3"></div>
     <div class="text-center col-md-6">
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
     </div>
     <div class="col col-md-3"></div>
 </div>
+
 </div>
 
 @section Scripts {

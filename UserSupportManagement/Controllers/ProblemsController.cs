@@ -175,6 +175,9 @@ namespace UserSupportManagement.Controllers
             int ProblemId = Convert.ToInt32(TempData["ProblemId"]);
             ViewBag.ProblemId = ProblemId;
 
+            var problem = _context.Problems.FirstOrDefault(x => x.ProblemId == ProblemId);
+            ViewBag.ProblemName = problem.ProblemName;
+
             ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes.Where(x => x.IsActive == true).Where(a => a.IsDeleted == false), "StatusTypeId", "StatusTypeName");
 
             return View();
@@ -199,13 +202,15 @@ namespace UserSupportManagement.Controllers
             {
                 _context.Add(solution);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Solutions");
             }
 
             //ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
             ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
             return View(solution);
         }
+
 
         // GET: Problems/Edit
         public async Task<IActionResult> Edit(int? id)
