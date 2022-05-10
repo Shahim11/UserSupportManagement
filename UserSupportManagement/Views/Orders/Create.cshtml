@@ -4,6 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
+<div class="container pb-5">
 <h1 class="text-center">Create</h1>
 
 @*<h4>Order</h4>*@
@@ -13,35 +14,37 @@
     <div class="col col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="VendorId" class="control-label">Vendor Name</label>
-                <select asp-for="VendorId" class="form-control text-center" asp-items="ViewBag.VendorId">Vendors</select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatusTypeId" class="control-label">Status Type</label>
-                <select asp-for="StatusTypeId" class="form-control text-center" asp-items="ViewBag.StatusTypeId"></select>
-            </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ProblemId" class="control-label">Problem Name </label>
                 <select asp-for="ProblemId" class="form-control text-center" asp-items="ViewBag.ProblemId"></select>
             </div>
-            <div class="form-group">
+
+            <div class="form-group mb-3">
+                <label asp-for="VendorId" class="control-label">Vendor Name</label>
+                <select asp-for="VendorId" class="form-control text-center" asp-items="ViewBag.VendorId">Vendors</select>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="StatusTypeId" class="control-label">Status Type</label>
+                <select asp-for="StatusTypeId" class="form-control text-center" asp-items="ViewBag.StatusTypeId"></select>
+            </div>
+            
+            <div class="form-group mb-3">
                 <label asp-for="OrderName" class="control-label">Order Name</label>
                 <input asp-for="OrderName" class="form-control"/>
                 <span asp-validation-for="OrderName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="OrderItemName" class="control-label">Item Name</label>
                 <input asp-for="OrderItemName" class="form-control"/>
                 <span asp-validation-for="OrderItemName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="OrderItemDetails" class="control-label">Item Details</label>
                 @*<input asp-for="OrderItemDetails" class="form-control" />*@
                 <span asp-validation-for="OrderItemDetails" class="text-danger"></span>
-                <textarea class="form-control" asp-for="OrderItemDetails"></textarea>
+                <textarea class="form-control" asp-for="OrderItemDetails" id="exampleFormControlTextarea1" rows="6.5"></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="OrderItemQuantity" class="control-label">Quantity</label>
                 <input asp-for="OrderItemQuantity" class="form-control"/>
                 <span asp-validation-for="OrderItemQuantity" class="text-danger"></span>
@@ -76,7 +79,7 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <input type="submit" value="Create" class="btn btn-success btn-block"/>
             </div>
         </form>
@@ -90,6 +93,7 @@
         <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
     </div>
     <div class="col col-md-3"></div>
+</div>
 </div>
 
 @section Scripts {

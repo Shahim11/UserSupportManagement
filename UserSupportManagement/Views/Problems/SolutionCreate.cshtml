@@ -21,20 +21,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mb-3">
                 <input asp-for="ProblemId" value="@ViewBag.ProblemId" type="hidden"/>
-                <label asp-for="ProblemId" class="control-label"></label>
+                <label asp-for="ProblemId" class="control-label">Problem Name</label>
                 <input readonly type="text" class="form-control text-center" value="@ViewBag.ProblemName"/> 
                 <span asp-validation-for="ProblemId" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="StatusTypeId" class="control-label"></label>
+                <label asp-for="StatusTypeId" class="control-label">Status Type Name</label>
                 <select asp-for="StatusTypeId" class="form-control text-center" asp-items="ViewBag.StatusTypeId"></select>
             </div>
-            <div class="form-group mb-5">
-                <label asp-for="SolutionDetails" class="control-label"></label>
+            <div class="form-group mb-3">
+                <label asp-for="SolutionDetails" class="control-label"> Solution Details</label>
                 @*<input asp-for="SolutionDetails" class="form-control" />*@
                 <span asp-validation-for="SolutionDetails" class="text-danger"></span>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="6.5" asp-for="SolutionDetails"></textarea>
             </div>
+            
+            <div class="form-group form-check mb-3">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="orderNeeded"/> Order Needed
+                </label>
+            </div>
+
             @*<div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)

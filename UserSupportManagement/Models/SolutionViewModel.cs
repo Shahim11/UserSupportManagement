@@ -45,5 +45,13 @@ namespace UserSupportManagement.Models
 
         public string EmployeeCode { get; set; }
 
+        public bool orderNeeded { get; set; }
+
+        public int OrderId { get; set; }
+
+        public string OrderDetails { get; set; }
+
+        public string OrderItemDetails { get; set; }
+
     }
 }

@@ -75,7 +75,7 @@ namespace UserSupportManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Solution solution)
+        public async Task<IActionResult> Create([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy,orderNeeded")] Solution solution)
         {
             solution.IsActive = true;
             solution.IsDeleted = false;
@@ -119,7 +119,7 @@ namespace UserSupportManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Solution solution)
+        public async Task<IActionResult> Edit(int id, [Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy,orderNeeded")] Solution solution)
         {
             if (id != solution.SolutionId)
             {

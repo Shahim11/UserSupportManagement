@@ -21,5 +21,7 @@ namespace UserSupportManagement.Models
         public bool IsActive { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public bool orderNeeded { get; set; }
     }
 }

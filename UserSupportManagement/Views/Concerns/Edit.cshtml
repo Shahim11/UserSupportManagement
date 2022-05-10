@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+<div class="container pb-5">
 <h1 class="text-center">Edit</h1>
 
 @*<h4>Concern</h4>*@
@@ -14,22 +14,22 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ConcernId"/>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ConcernName" class="control-label">Concern Name</label>
                 <input asp-for="ConcernName" class="form-control"/>
                 <span asp-validation-for="ConcernName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ConcernShortName" class="control-label"> Concern Short Name</label>
                 <input asp-for="ConcernShortName" class="form-control"/>
                 <span asp-validation-for="ConcernShortName" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check mb-3">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsActive"/> @Html.DisplayNameFor(model => model.IsActive)
                 </label>
             </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check mb-3">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>
@@ -54,8 +54,10 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success btn-block"/>
+            <div class="form-group text-center mb-3">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" type="submit" value="Save">Create</button>
+                </div>
             </div>
         </form>
     </div>
@@ -65,11 +67,13 @@
 <div class="row justify-content-md-center">
     <div class="col col-md-3"></div>
     <div class="text-center col-md-6">
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
     </div>
     <div class="col col-md-3"></div>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

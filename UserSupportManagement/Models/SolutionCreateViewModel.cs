@@ -25,5 +25,7 @@ namespace UserSupportManagement.Models
         public string CreatedBy { get; set; }
 
         public string ModifiedBy { get; set; }
+
+        public bool orderNeeded { get; set; }
     }
 }

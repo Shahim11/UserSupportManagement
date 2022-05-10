@@ -14,12 +14,12 @@
     <div class="col col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ConcernName" class="control-label">Concern Name</label>
                 <input asp-for="ConcernName" class="form-control"/>
                 <span asp-validation-for="ConcernName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ConcernShortName" class="control-label">Concern Short Name</label>
                 <input asp-for="ConcernShortName" class="form-control"/>
                 <span asp-validation-for="ConcernShortName" class="text-danger"></span>
@@ -49,9 +49,12 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success btn-block"/>
+            <div class="form-group text-center mb-3">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" type="submit" value="Create">Create</button>
+                </div>
             </div>
+
         </form>
     </div>
     <div class="col col-md-3"></div>
@@ -60,7 +63,9 @@
 <div class="row justify-content-md-center">
     <div class="col col-md-3"></div>
     <div class="text-center col-md-6">
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
     </div>
     <div class="col col-md-3"></div>
 </div>

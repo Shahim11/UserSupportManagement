@@ -30,41 +30,44 @@
                 <dd class = "col-sm-7">
                     @Html.DisplayFor(model => model.ConcernShortName)
                 </dd>
-        
-                <dt class = "col-sm-5">
+            
+            @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+            {
+                <dt class="col-sm-5">
                     CreatedBy
                 </dt>
-                <dd class = "col-sm-7">
+                <dd class="col-sm-7">
                     @Html.DisplayFor(model => model.CreatedBy)
                 </dd>
 
-                <dt class = "col-sm-5">
+                <dt class="col-sm-5">
                     CreatedDate
                 </dt>
-                <dd class = "col-sm-7">
+                <dd class="col-sm-7">
                     @Html.DisplayFor(model => model.CreatedDate)
                 </dd>
 
-                <dt class = "col-sm-5">
+                <dt class="col-sm-5">
                     ModifiedBy
                 </dt>
-                <dd class = "col-sm-7">
+                <dd class="col-sm-7">
                     @Html.DisplayFor(model => model.ModifiedBy)
                 </dd>
 
-                <dt class = "col-sm-5">
+                <dt class="col-sm-5">
                     ModifiedDate
                 </dt>
-                <dd class = "col-sm-7">
+                <dd class="col-sm-7">
                     @Html.DisplayFor(model => model.ModifiedDate)
                 </dd>
 
-                <dt class = "col-sm-5">
+                <dt class="col-sm-5">
                     IsActive
                 </dt>
-                <dd class = "col-sm-7">
+                <dd class="col-sm-7">
                     @Html.DisplayFor(model => model.IsActive)
                 </dd>
+            }
             </dl>
         </div>
         <div class="col col-md-3"></div>
@@ -77,10 +80,15 @@
     <div class="col col-md-6">
         @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Edit)).Result.Succeeded)
         {
-            <a class="btn btn-success btn-block" asp-action="Edit" asp-route-id="@Model.ConcernId"><i class="fas fa-pencil-alt"></i> Edit </a>
+            <div class="d-grid gap-2">
+                <a class="btn btn-success mb-3" asp-action="Edit" asp-route-id="@Model.ConcernId"><i class="fas fa-pencil-alt"></i> Edit </a>
+            </div>         
         }
 
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary mb-3" asp-action="Index">Back to List</a>
+        </div>
+       
     </div>
     <div class="col col-md-3"></div>
 </div>

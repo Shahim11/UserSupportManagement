@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="container pb-3">
+<div class="container pb-5">
     <h1 class="text-center mt-3">Create</h1>
     <hr />
     @*<h4>Problem</h4>*@
@@ -16,12 +16,16 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group mb-3">
                     <label asp-for="ProblemTypeId" class="text-center control-label">Problem Type</label>
-                    <select asp-for="ProblemTypeId" class ="form-control text-center" asp-items="ViewBag.ProblemTypeId"></select>
+                    <select asp-for="ProblemTypeId" class="form-control text-center" asp-items="ViewBag.ProblemTypeId">
+                        <option selected value=""> - - Select - - </option>
+                    </select>
                 </div>
+
                 @*<div class="form-group">
                     <label asp-for="StatusTypeId" class="control-label"></label>
                     <select asp-for="StatusTypeId" class ="form-control" asp-items="ViewBag.StatusTypeId"></select>
                 </div>*@
+
                 <div class="form-group mb-3">
                     <label asp-for="ProblemName" class="control-label text-center">Problem Name</label>
                     <input asp-for="ProblemName" class="form-control" />

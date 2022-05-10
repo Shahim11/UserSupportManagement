@@ -103,6 +103,8 @@ namespace UserSupportManagement.Controllers
 
             //var solution = _context.Solutions.FirstOrDefault(x => x.ProblemId == problem.ProblemId);
 
+            var order = _context.Orders.FirstOrDefault(x => x.ProblemId == problem.ProblemId);
+
             if (problem == null)
             {
                 return NotFound();
@@ -117,17 +119,27 @@ namespace UserSupportManagement.Controllers
             if (solution != null)
             {
                 solutionViewModel.SolutionDetails = solution.SolutionDetails;
+                solutionViewModel.orderNeeded = solution.orderNeeded;
             }
+
+            if (order != null)
+            {
+                solutionViewModel.OrderId = order.OrderId;
+            }
+
             //else
             //{
             //    solutionViewModel.SolutionDetails = "Solution Isn't Created Yet!";
             //}
+
             solutionViewModel.CreatedBy = problem.CreatedBy;
             solutionViewModel.CreatedDate = problem.CreatedDate;
             solutionViewModel.ModifiedBy = problem.ModifiedBy;
             solutionViewModel.ModifiedDate = problem.ModifiedDate;
             solutionViewModel.IsActive = problem.IsActive;
             solutionViewModel.IsDeleted = problem.IsDeleted;
+
+            //solutionViewModel.orderNeeded = solution.orderNeeded;
 
             TempData["ProblemId"] = solutionViewModel.ProblemId; 
 
@@ -172,6 +184,7 @@ namespace UserSupportManagement.Controllers
             //var problem = _context.Problems.FirstOrDefault(x => x.ProblemId == Convert.ToInt32(pid));
             //ViewBag.ProblemName = problem.ProblemName;
             //ViewBag.ProblemId = problem.ProblemId;
+
             int ProblemId = Convert.ToInt32(TempData["ProblemId"]);
             ViewBag.ProblemId = ProblemId;
 
@@ -188,7 +201,7 @@ namespace UserSupportManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SolutionCreate([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Solution solution)
+        public async Task<IActionResult> SolutionCreate([Bind("SolutionId,ProblemId,StatusTypeId,SolutionDetails,IsActive,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy,orderNeeded")] Solution solution)
         {
             solution.IsActive = true;
             solution.IsDeleted = false;
@@ -209,6 +222,50 @@ namespace UserSupportManagement.Controllers
             //ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName", solution.ProblemId);
             ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName", solution.StatusTypeId);
             return View(solution);
+        }
+
+        // GET: Orders/Create
+        public IActionResult OrderCreate()
+        {
+            int ProblemId = Convert.ToInt32(TempData["ProblemId"]);
+            ViewBag.ProblemId = ProblemId;
+
+            var problem = _context.Problems.FirstOrDefault(x => x.ProblemId == ProblemId);
+            ViewBag.ProblemName = problem.ProblemName;
+
+            //ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemName");
+            
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeName");
+            ViewData["VendorId"] = new SelectList(_context.Vendors, "VendorId", "VendorName");
+            return View();
+        }
+
+        // POST: Orders/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OrderCreate([Bind("OrderId,VendorId,StatusTypeId,ProblemId,OrderName,OrderItemName,OrderItemDetails,OrderItemQuantity,IsActive,IsDeleted,CreatedDate,ModifiedDate,CreatedBy,ModifiedBy")] Order order)
+        {
+            order.IsActive = true;
+            order.IsDeleted = false;
+
+            int ProblemId = Convert.ToInt32(TempData["ProblemId"]);
+            //var pid = Request.Query["problemId"];
+            order.ProblemId = ProblemId;
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(order);
+                await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Orders");
+            }
+            //ViewData["ProblemId"] = new SelectList(_context.Problems, "ProblemId", "ProblemId", order.ProblemId);
+            
+            ViewData["StatusTypeId"] = new SelectList(_context.StatusTypes, "StatusTypeId", "StatusTypeId", order.StatusTypeId);
+            ViewData["VendorId"] = new SelectList(_context.Vendors, "VendorId", "VendorId", order.VendorId);
+            return View(order);
         }
 
 

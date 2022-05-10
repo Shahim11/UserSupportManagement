@@ -2,8 +2,9 @@
 @inject IAuthorizationService AuthorizationService
 @using UserSupportManagement.Constants
 @using Solution = Microsoft.CodeAnalysis.Solution
-@*@model UserSupportManagement.Models.Problem*@
 @model UserSupportManagement.Models.SolutionViewModel
+
+@*@model UserSupportManagement.Models.Problem*@
 @*@model IEnumerable<SolutionViewModel>*@
 
 
@@ -59,6 +60,31 @@
                     </dd>
                     <hr/>
                 }
+                
+                @if (Model.OrderItemDetails != null)
+                {
+                    <dt class="col-sm-4">
+                        Order Details
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        <div class="row justify-content-md-center">
+                        <div class="col col-md-3"></div>
+                            <div class="col col-md-6">
+                                <input type="hidden" asp-for="OrderId" />
+                                @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Orders.View)).Result.Succeeded)
+                                {
+                                    <div class="d-grid gap-2">
+                                        <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@Model.OrderId"><i class="fa-solid fa-circle-info"></i> Details</a>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col col-md-3"></div>
+                        </div> 
+                    </dd>
+                 
+                    <hr/>
+                }
 
                 @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
                 {
@@ -108,6 +134,16 @@
     <div class="row justify-content-md-center">
         <div class="col col-md-3"></div>
         <div class="col col-md-6">
+            @if (Model.orderNeeded == true )
+            {
+                @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Orders.Create)).Result.Succeeded)
+                {
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-success mb-3" asp-controller="Problems" asp-action="OrderCreate"><i class="fa-solid fa-circle-plus"></i> Create Order</a>
+                    </div>
+                }
+            }
+            
             @if (Model.SolutionDetails == null)
             {
                 @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Solutions.Create)).Result.Succeeded)

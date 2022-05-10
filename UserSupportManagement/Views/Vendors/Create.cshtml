@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="container pb-3">
+<div class="container pb-5">
     <h1 class="text-center mt-3">Create</h1>
 
 @*<h4>Vendor</h4>*@
@@ -14,38 +14,38 @@
     <div class="col col-md-6 text-center">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="VendorName" class="control-label">Vendor Name</label>
                 <input asp-for="VendorName" class="form-control"/>
                 <span asp-validation-for="VendorName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="VendorDetails" class="control-label">Details</label>
                 @*<input asp-for="VendorDetails" class="form-control" />*@
                 <span asp-validation-for="VendorDetails" class="text-danger"></span>
                 <textarea class="form-control" asp-for="VendorDetails"></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="VendorEmail" class="control-label">Email</label>
                 <input asp-for="VendorEmail" class="form-control"/>
                 <span asp-validation-for="VendorEmail" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="VendorPhoneNumber" class="control-label">Phone Number</label>
                 <input asp-for="VendorPhoneNumber" class="form-control"/>
                 <span asp-validation-for="VendorPhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="VendorAddress" class="control-label">Address</label>
                 <input asp-for="VendorAddress" class="form-control"/>
                 <span asp-validation-for="VendorAddress" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ContactPersonName" class="control-label">Contact Person Name</label>
                 <input asp-for="ContactPersonName" class="form-control"/>
                 <span asp-validation-for="ContactPersonName" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ContactPersonPhoneNumber" class="control-label">Contact Person Phone Number</label>
                 <input asp-for="ContactPersonPhoneNumber" class="form-control"/>
                 <span asp-validation-for="ContactPersonPhoneNumber" class="text-danger"></span>
@@ -75,20 +75,27 @@
                 <input asp-for="ModifiedBy" class="form-control" />
                 <span asp-validation-for="ModifiedBy" class="text-danger"></span>
             </div>*@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-success btn-block"/>
+            
+            <div class="form-group text-center mb-3">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success" type="submit" value="Create">Create</button>
+                </div>
             </div>
         </form>
     </div>
     <div class="col col-md-3"></div>
 </div>
+
 <div class="row justify-content-md-center">
     <div class="col col-md-3"></div>
     <div class="text-center col-md-6">
-        <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+        <div class="d-grid gap-2">
+            <a class="btn btn-primary" asp-action="Index">Back to List</a>
+        </div>
     </div>
     <div class="col col-md-3"></div>
 </div>
+
 </div>
 
 @section Scripts {

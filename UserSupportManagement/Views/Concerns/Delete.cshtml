@@ -79,18 +79,21 @@
             <div class="col col-md-3"></div>
         
         </div>
+        
         <div class="row justify-content-md-center">
             <div class="col col-md-3"></div>
-            <div class="col col-md-6">
-                @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Concerns.Delete)).Result.Succeeded)
-                {
-                    <input type="hidden" asp-for="ConcernId"/>
-                    <input type="submit" value="Delete" class="btn btn-danger btn-block"/>
-                }
-                <a class="btn btn-primary btn-block" asp-action="Index">Back to List</a>
+            <div class="text-center col-md-6">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="ConcernId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a class="btn btn-primary" asp-action="Index">Back to List</a>
+                </form>
             </div>
             <div class="col col-md-3"></div>
         </div>
+    </div>
+
+        
     </div>
 
     
