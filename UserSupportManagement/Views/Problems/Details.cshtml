@@ -61,7 +61,7 @@
                     <hr/>
                 }
                 
-                @if (Model.OrderItemDetails != null)
+                @if (Model.OrderDetails != null)
                 {
                     <dt class="col-sm-4">
                         Order Details
@@ -69,18 +69,18 @@
 
                     <dd class="col-sm-8">
                         <div class="row justify-content-md-center">
-                        <div class="col col-md-3"></div>
+                            <div class="col col-md-3"></div>
                             <div class="col col-md-6">
-                                <input type="hidden" asp-for="OrderId" />
+                                <input type="hidden" asp-for="OrderId"/>
                                 @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Orders.View)).Result.Succeeded)
                                 {
                                     <div class="d-grid gap-2">
-                                        <a class="btn btn-success mb-3" asp-action="Details" asp-route-id="@Model.OrderId"><i class="fa-solid fa-circle-info"></i> Details</a>
+                                        <a class="btn btn-success mb-3" asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId"><i class="fa-solid fa-circle-info"></i> Details</a>
                                     </div>
                                 }
                             </div>
                             <div class="col col-md-3"></div>
-                        </div> 
+                        </div>
                     </dd>
                  
                     <hr/>
@@ -134,7 +134,7 @@
     <div class="row justify-content-md-center">
         <div class="col col-md-3"></div>
         <div class="col col-md-6">
-            @if (Model.orderNeeded == true )
+            @if (Model.orderNeeded == true && Model.OrderDetails == null)
             {
                 @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Orders.Create)).Result.Succeeded)
                 {

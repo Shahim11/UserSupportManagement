@@ -12,10 +12,16 @@
 
     <h1 class="text-center mt-3">Problems List</h1>
     <br />
-    <div class="createbutton">
+
+    @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin"))
+    {
+        <div class="createbutton">
         <a class="btn btn-primary mb-3 text-end" asp-controller="ProblemReport" asp-action="Report">Report</a>
-    </div>
+        </div>
+    }
     
+    
+
     <div class="createbutton">
         @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Problems.Create)).Result.Succeeded)
         {
@@ -45,7 +51,7 @@
                 @*<th>
                     @Html.DisplayNameFor(model => model.ProblemDetails)
                 </th>*@
-                @if (User.IsInRole("SuperAdmin"))
+                @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin") ||User.IsInRole("Support") ||User.IsInRole("SupplyChain"))
                 {
                     <th>
                         Created User

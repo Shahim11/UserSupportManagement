@@ -12,7 +12,7 @@ using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Controllers
 {
-    [Authorize(Roles = "SuperAdmin,Admin")]
+    [Authorize(Roles = "SuperAdmin,Admin,Support")]
     public class VendorsController : Controller
     {
         private readonly ApplicationDbContext _context;

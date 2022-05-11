@@ -11,7 +11,7 @@ using UserSupportManagement.Models;
 
 namespace UserSupportManagement.Controllers
 {
-    [Authorize(Roles = "SuperAdmin,Admin")]
+    [Authorize(Roles = "SuperAdmin,Admin,Support")]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;

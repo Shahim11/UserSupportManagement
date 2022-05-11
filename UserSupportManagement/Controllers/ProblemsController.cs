@@ -124,6 +124,7 @@ namespace UserSupportManagement.Controllers
 
             if (order != null)
             {
+                solutionViewModel.OrderDetails = order.OrderItemDetails;
                 solutionViewModel.OrderId = order.OrderId;
             }
 
