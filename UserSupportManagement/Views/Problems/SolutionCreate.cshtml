@@ -37,10 +37,32 @@
             </div>
             
             <div class="form-group form-check mb-3">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="orderNeeded"/> Order Needed
+                <label class="form-check-label" for="myCheck">
+                    <input class="form-check-input" asp-for="orderNeeded" type="checkbox" id="myCheck" onclick="myFunction()"/> Order Needed
                 </label>
+                
+                <div class="form-group mb-3" id="inputbox1" style="display:none">
+                    <label asp-for="OrderItemName" class="control-label">Item Name</label>
+                    <input asp-for="OrderItemName" class="form-control"/>
+                    <span asp-validation-for="OrderItemName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3" id="inputbox2" style="display:none">
+                    <label asp-for="OrderItemDetails" class="control-label">Item Details</label>
+                    <span asp-validation-for="OrderItemDetails" class="text-danger"></span>
+                    <textarea class="form-control" asp-for="OrderItemDetails" id="exampleFormControlTextarea1" rows="6.5"></textarea>
+                </div>
+                <div class="form-group mb-3" id="inputbox3" style="display:none">
+                    <label asp-for="OrderItemQuantity" class="control-label">Quantity</label>
+                    <input asp-for="OrderItemQuantity" class="form-control"/>
+                    <span asp-validation-for="OrderItemQuantity" class="text-danger"></span>
+                </div>
+
             </div>
+            
+            @*<label for="myCheck">Checkbox:</label> 
+            <input type="checkbox" id="myCheck" onclick="myFunction()">
+
+            <p id="text" style="display:none">Checkbox is CHECKED!</p>*@
 
             @*<div class="form-group form-check">
                 <label class="form-check-label">

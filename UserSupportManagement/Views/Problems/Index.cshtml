@@ -16,27 +16,27 @@
     @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin"))
     {
         <div class="createbutton">
-        <a class="btn btn-primary mb-3 text-end" asp-controller="ProblemReport" asp-action="Report">Report</a>
+        <a class="btn btn-primary mb-2 text-end" asp-controller="ProblemReport" asp-action="Report">Report</a>
         </div>
     }
     
     
 
     <div class="createbutton">
+        @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin") ||User.IsInRole("Support") ||User.IsInRole("SupplyChain"))
+        {
+            <a class="btn btn-primary mb-3 text-end me-2" asp-action="ProblemFilter">Own</a>
+        }
+
         @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Problems.Create)).Result.Succeeded)
         {
             <a class="btn btn-primary mb-3 text-end" asp-action="Create"><i class="fa-solid fa-circle-plus"></i> Create New</a>
         }
     </div>
     
-    @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin") ||User.IsInRole("Support") ||User.IsInRole("SupplyChain"))
-    {
-        <div class="createbutton">
-            <a class="btn btn-primary mb-3 text-end" asp-action="ProblemFilter">Own</a>
-        </div>
-    }
     
-    <table class="table">
+    
+    <table class="table table-success table-striped">
         <thead>
             <tr>
                 <th>

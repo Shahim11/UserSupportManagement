@@ -23,5 +23,11 @@ namespace UserSupportManagement.Models
         public bool IsDeleted { get; set; }
 
         public bool orderNeeded { get; set; }
+
+        public string OrderItemName { get; set; }
+
+        public string OrderItemDetails { get; set; }
+
+        public string OrderItemQuantity { get; set; }
     }
 }

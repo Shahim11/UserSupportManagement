@@ -10,26 +10,30 @@
 <div class="container pb-5">
     <h1 class="text-center mt-3">Users List</h1>
     <br />
-    <div class="createbutton">
+    <div class="createbutton mb-3">
+        @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin") ||User.IsInRole("Support") ||User.IsInRole("SupplyChain"))
+        {
+            <a class="dropdown">
+                <a class="btn btn-primary dropdown-toggle me-2" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Role User Filter
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" asp-controller="UserRoles" asp-action="FilterAdminRole">Admin Role User</a></li>
+                    <li><a class="dropdown-item" asp-controller="UserRoles" asp-action="FilterSupportRole">Support Role User</a></li>
+                    <li><a class="dropdown-item" asp-controller="UserRoles" asp-action="FilterSupplyChainRole">Supply Chain Role User</a></li>
+                    <li><a class="dropdown-item" asp-controller="UserRoles" asp-action="FilterBasicRole">Basic Role User</a></li>
+                </ul>
+            </a>
+
+        }
 
         @if ((AuthorizationService.AuthorizeAsync(User, Permissions.Employees.Create)).Result.Succeeded)
         {
-            <a class="btn btn-primary mb-3 text-end" asp-area="Identity" asp-page="/Account/Register"><i class="fa-solid fa-circle-plus"></i> Create New</a>
+            <a class="btn btn-primary text-end" asp-area="Identity" asp-page="/Account/Register"><i class="fa-solid fa-circle-plus"></i> Create New</a>
         }
-    </div>
 
-    @if (User.IsInRole("SuperAdmin")||User.IsInRole("Admin") ||User.IsInRole("Support") ||User.IsInRole("SupplyChain"))
-    {
-        <div class="createbutton">
-            <a class="btn btn-primary mb-3 text-end" asp-controller="UserRoles" asp-action="FilterAdminRole">Admin Role User</a>
-        
-            <a class="btn btn-primary mb-3 ms-3 text-end" asp-controller="UserRoles" asp-action="FilterSupportRole">Support Role User</a>
-        
-            <a class="btn btn-primary mb-3 ms-3 text-end" asp-controller="UserRoles" asp-action="FilterSupplyChainRole">Supply Chain Role User</a>
-        
-            <a class="btn btn-primary mb-3 ms-3 text-end" asp-controller="UserRoles" asp-action="FilterBasicRole">Basic Role User</a>
-        </div>
-    }
+    </div>
 
     <table class="table table-striped table-hover">
         <thead>
